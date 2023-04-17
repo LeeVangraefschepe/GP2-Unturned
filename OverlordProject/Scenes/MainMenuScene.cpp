@@ -8,8 +8,9 @@ void MainMenuScene::Initialize()
 {
 	m_SceneContext.settings.drawUserDebug = false;
 	m_SceneContext.settings.drawGrid = false;
+	m_SceneContext.settings.showInfoOverlay = false;
 	m_SceneContext.settings.drawPhysXDebug = false;
-	m_SceneContext.settings.enableOnGUI = true;
+	m_SceneContext.settings.enableOnGUI = false;
 	m_SceneContext.settings.clearColor = XMFLOAT4{ 0.f,0.f,0.f,1.f };
 
 	m_pSprite = new GameObject();

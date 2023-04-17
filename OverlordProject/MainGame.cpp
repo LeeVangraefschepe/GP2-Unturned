@@ -11,6 +11,7 @@ void MainGame::OnGamePreparing(GameContext& gameContext)
 	//gameContext.windowHeight=... (default is 720)
 
 	gameContext.windowTitle = L"Unturned";
+	gameContext.fullScreen = false;
 }
 
 void MainGame::Initialize()
