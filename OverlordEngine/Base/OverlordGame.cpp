@@ -130,57 +130,30 @@ HRESULT OverlordGame::InitializeWindow()
 		HANDLE_ERROR(HRESULT_FROM_WIN32(error))
 	}
 
-	if (m_GameContext.fullScreen)
-	{
-		// 2. Create Window (Full-screen)
-// ********************************
-		DXGI_OUTPUT_DESC outputDesc{};
-		HANDLE_ERROR(m_GameContext.d3dContext.pOutput->GetDesc(&outputDesc))
-
-			m_GameContext.windowHandle = CreateWindow(
-				className,
-				m_GameContext.windowTitle.c_str(),
-				WS_POPUP,
-				outputDesc.DesktopCoordinates.left,
-				outputDesc.DesktopCoordinates.top,
-				outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left,
-				outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top,
-				NULL,
-				nullptr,
-				m_hInstance,
-				this);
-
-		SetWindowPos(m_GameContext.windowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-		ShowWindow(m_GameContext.windowHandle, SW_SHOWMAXIMIZED);
-
-	}
-	else
-	{
-		//2. Create Window
+	//2. Create Window
 	//****************
-		DXGI_OUTPUT_DESC outputDesc{};
-		HANDLE_ERROR(m_GameContext.d3dContext.pOutput->GetDesc(&outputDesc))
+	DXGI_OUTPUT_DESC outputDesc{};
+	HANDLE_ERROR(m_GameContext.d3dContext.pOutput->GetDesc(&outputDesc))
 
-			RECT r = { 0, 0, LONG(m_GameContext.windowWidth), LONG(m_GameContext.windowHeight) };
-		AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
-		const auto winWidth = r.right - r.left;
-		const auto winHeight = r.bottom - r.top;
+		RECT r = { 0, 0, LONG(m_GameContext.windowWidth), LONG(m_GameContext.windowHeight) };
+	AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
+	const auto winWidth = r.right - r.left;
+	const auto winHeight = r.bottom - r.top;
 
-		const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left) / 2) - winWidth / 2;
-		const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top) / 2 - winHeight / 2;
+	const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left) / 2) - winWidth / 2;
+	const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top) / 2 - winHeight / 2;
 
-		m_GameContext.windowHandle = CreateWindow(className,
-			m_GameContext.windowTitle.c_str(),
-			WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
-			x,
-			y,
-			winWidth,
-			winHeight,
-			NULL,
-			nullptr,
-			m_hInstance,
-			this);
-	}
+	m_GameContext.windowHandle = CreateWindow(className,
+		m_GameContext.windowTitle.c_str(),
+		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
+		x,
+		y,
+		winWidth,
+		winHeight,
+		NULL,
+		nullptr,
+		m_hInstance,
+		this);
 
 	if(!m_GameContext.windowHandle)
 	{
@@ -417,7 +390,7 @@ LRESULT OverlordGame::WindowsProcedure(HWND hWnd, UINT message, WPARAM wParam, L
 			else StateChanged(1, false);
 
 			return 0;
-		case WM_SIZE:
+	case WM_SIZE:
 			if (wParam == SIZE_MINIMIZED) StateChanged(0, false);
 			else if (wParam == SIZE_RESTORED) StateChanged(0, true);
 			return 0;

@@ -13,5 +13,7 @@ protected:
 	void OnGamePreparing(GameContext& gameContext) override;
 	void Initialize() override;
 	LRESULT WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
+private:
+	GameContext* m_gameContext{nullptr};
 };
 

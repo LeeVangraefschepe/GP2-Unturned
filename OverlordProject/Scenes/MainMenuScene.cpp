@@ -23,6 +23,7 @@ void MainMenuScene::Initialize()
 void MainMenuScene::Update()
 {
 	m_pSprite->GetTransform()->Rotate(0.f, 0.f, m_TotalRotation);
+	std::cout << "Width: " << m_SceneContext.windowWidth << "\n";
 }
 
 void MainMenuScene::Draw()
