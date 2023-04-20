@@ -31,7 +31,7 @@ void SpriteComponent::SetDimensions(float width, float height)
 	GetTransform()->Scale(XMFLOAT3{ widthScale,heightScale,1.f});
 }
 
-void SpriteComponent::Draw(const SceneContext& sceneContext)
+void SpriteComponent::Draw(const SceneContext&)
 {
 	if (!m_pTexture)
 		return;
@@ -40,10 +40,21 @@ void SpriteComponent::Draw(const SceneContext& sceneContext)
 	const XMFLOAT3& position{ pTransform->GetWorldPosition() };
 	const XMFLOAT3& scale{ pTransform->GetWorldScale() };
 
-	SpriteRenderer::Get()->DrawImmediate
+	//SpriteRenderer::Get()->DrawImmediate
+	//(
+	//	sceneContext.d3dContext,
+	//	m_pTexture->GetShaderResourceView(),
+	//	XMFLOAT2{ position.x, position.y },
+	//	m_Color,
+	//	m_Pivot,
+	//	XMFLOAT2{ scale.x, scale.y },
+	//	MathHelper::QuaternionToEuler(pTransform->GetWorldRotation()).z,
+	//	pTransform->GetPosition().z
+	//);
+
+	SpriteRenderer::Get()->AppendSprite
 	(
-		sceneContext.d3dContext,
-		m_pTexture->GetShaderResourceView(),
+		m_pTexture,
 		XMFLOAT2{ position.x, position.y },
 		m_Color,
 		m_Pivot,

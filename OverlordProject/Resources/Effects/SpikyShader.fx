@@ -1,128 +1,129 @@
-//************
-// VARIABLES *
-//************
-float4x4 m_MatrixWorldViewProj : WORLDVIEWPROJECTION;
-float4x4 m_MatrixWorld : WORLD;
-float3 m_LightDirection : DIRECTION
-<
-	string Object="TargetLight";
-> = float3(0.577f, -0.577f, 0.577f);
+//INCOMPLETE!
 
-float3 gColorDiffuse : COLOR = float3(1,1,1);
+float4x4 gTransform : WORLDVIEWPROJECTION;
+Texture2D gSpriteTexture;
+float2 gTextureSize;
 
-float gSpikeLength
-<
-	string UIWidget="Slider";
-	float UIMin=0.0f;
-	float UIMax=0.5f;
-	float UIStep=0.0001f;
-> = 0.2f;
-
-RasterizerState FrontCulling 
-{ 
-	CullMode = FRONT; 
+SamplerState samPoint
+{
+	Filter = MIN_MAG_MIP_POINT;
+	AddressU = WRAP;
+	AddressV = WRAP;
 };
 
-//**********
-// STRUCTS *
-//**********
+BlendState EnableBlending
+{
+	BlendEnable[0] = TRUE;
+	SrcBlend = SRC_ALPHA;
+	DestBlend = INV_SRC_ALPHA;
+};
+
+RasterizerState BackCulling
+{
+	CullMode = BACK;
+};
+
+//SHADER STRUCTS
+//**************
 struct VS_DATA
 {
-    float3 Position : POSITION;
-    float3 Normal : NORMAL;
+	int Channel : TEXCOORD2; //Texture Channel
+	float3 Position : POSITION; //Left-Top Character Quad Starting Position
+	float4 Color: COLOR; //Color of the vertex
+	float2 TexCoord: TEXCOORD0; //Left-Top Character Texture Coordinate on Texture
+	float2 CharSize: TEXCOORD1; //Size of the character (in screenspace)
 };
 
 struct GS_DATA
 {
-    float4 Position : SV_POSITION;
-    float3 Normal : NORMAL;
+	float4 Position : SV_POSITION; //HOMOGENEOUS clipping space position
+	float4 Color: COLOR; //Color of the vertex
+	float2 TexCoord: TEXCOORD0; //Texcoord of the vertex
+	int Channel : TEXCOORD1; //Channel of the vertex
 };
 
-//****************
-// VERTEX SHADER *
-//****************
-VS_DATA MainVS(VS_DATA vsData)
+//VERTEX SHADER
+//*************
+VS_DATA MainVS(VS_DATA input)
 {
-	return vsData;
+	return input;
 }
 
-//******************
-// GEOMETRY SHADER *
-//******************
-void CreateVertex(inout TriangleStream<GS_DATA> triStream, float3 pos, float3 normal)
+//GEOMETRY SHADER
+//***************
+void CreateVertex(inout TriangleStream<GS_DATA> triStream, float3 pos, float4 col, float2 texCoord, int channel)
 {
-	//Step 1. Create a GS_DATA object
-	GS_DATA temp = (GS_DATA) 0;
-	//Step 2. Transform the position using the WVP Matrix and assign it to (GS_DATA object).Position (Keep in mind: float3 -> float4)
-	temp.Position = mul(float4(pos, 1), m_MatrixWorldViewProj);
-	//Step 3. Transform the normal using the World Matrix and assign it to (GS_DATA object).Normal (Only Rotation, No translation!)
-	temp.Normal = mul(normal, (float3x3) m_MatrixWorld);
-	//Step 4. Append (GS_DATA object) to the TriangleStream parameter (TriangleStream::Append(...))
+	//Create a new GS_DATA object
+	GS_DATA temp = (GS_DATA)0;
+	//Fill in all the fields
+	temp.Position = float4(pos, 1);
+	temp.Color = col;
+	temp.TexCoord = texCoord;
+	temp.Channel = channel;
+	//Append it to the TriangleStream
 	triStream.Append(temp);
 }
 
-[maxvertexcount(9)]
-void SpikeGenerator(triangle VS_DATA vertices[3], inout TriangleStream<GS_DATA> triStream)
+[maxvertexcount(4)]
+void MainGS(point VS_DATA vertex[1], inout TriangleStream<GS_DATA> triStream)
 {
-	//Use these variable names
-    float3 basePoint, top, left, right, spikeNormal;
-	
-	//Step 1. Calculate CENTER_POINT
-    basePoint = (vertices[0].Position + vertices[1].Position + vertices[2].Position) / 3.0f;
-    //Step 2. Calculate Face Normal (Original Triangle)
-    spikeNormal = (vertices[0].Normal + vertices[1].Normal + vertices[2].Normal) / 3.0f;
-    //Step 3. Offset CENTER_POINT (use gSpikeLength)
-    basePoint += spikeNormal * gSpikeLength;
+	//REMOVE THIS >
+	GS_DATA dummyData = (GS_DATA)0; //Just some dummy data
+	triStream.Append(dummyData); //The geometry shader needs to emit something, see what happens if it doesn't emit anything.
+	//< STOP REMOVING
 
-    //Step 4 + 5. Calculate Individual Face Normals (Cross Product of Face Edges) & Create Vertices for every face
+	//Create a Quad using the character information of the given vertex
+	//Note that the Vertex.CharSize is in screenspace, TextureCoordinates aren't ;) [Range 0 > 1]
 
-        //FACE 1
-    float3 faceNormal1 = normalize(cross(basePoint - vertices[0].Position, vertices[1].Position - vertices[0].Position));
-    CreateVertex(triStream, vertices[1].Position, faceNormal1);
-    CreateVertex(triStream, basePoint, faceNormal1);
-    CreateVertex(triStream, vertices[0].Position, faceNormal1);
+	//1. Vertex Left-Top
+	//CreateVertex(...);
+	float3 originalPos = vertex[0].Position;
+	float2 texCoord = vertex[0].TexCoord;
+	CreateVertex(triStream, originalPos, vertex[0].Color, texCoord, vertex[0].Channel);
 
-    //Restart Strip! >> We want to start a new triangle (= interrupt trianglestrip)
-    triStream.RestartStrip();
+	//2. Vertex Right-Top
+	originalPos = vertex[0].Position;
+	originalPos[0] += vertex[0].CharSize[0];
+	texCoord.x = vertex[0].TexCoord.x + vertex[0].CharSize[0] / gTextureSize.x;
+	CreateVertex(triStream, originalPos, vertex[0].Color, texCoord, vertex[0].Channel);
 
-    //FACE 2
-    float3 faceNormal2 = normalize(cross(basePoint - vertices[1].Position, vertices[2].Position - vertices[1].Position));
-    CreateVertex(triStream, vertices[2].Position, faceNormal2);
-    CreateVertex(triStream, basePoint, faceNormal2);
-    CreateVertex(triStream, vertices[1].Position, faceNormal2);
+	//3. Vertex Left-Bottom
+	originalPos = vertex[0].Position;
+	originalPos[1] += vertex[0].CharSize[1];
+	texCoord.y = vertex[0].TexCoord.y + vertex[0].CharSize[1] / gTextureSize.y;
+	CreateVertex(triStream, originalPos, vertex[0].Color, texCoord, vertex[0].Channel);
 
-    //Restart Strip! >> We want to start a new triangle (= interrupt trianglestrip)
-    triStream.RestartStrip();
-
-    //Face 3
-    float3 faceNormal3 = normalize(cross(basePoint - vertices[2].Position, vertices[0].Position - vertices[2].Position));
-    CreateVertex(triStream, vertices[0].Position, faceNormal3);
-    CreateVertex(triStream, basePoint, faceNormal3);
-    CreateVertex(triStream, vertices[2].Position, faceNormal3);
-
-    triStream.RestartStrip();
+	//4. Vertex Right-Bottom
+	originalPos = vertex[0].Position;
+	originalPos[0] += vertex[0].CharSize[0];
+	texCoord.x = vertex[0].TexCoord.x + vertex[0].CharSize[0] / gTextureSize.x;
+	CreateVertex(triStream, originalPos, vertex[0].Color, texCoord, vertex[0].Channel);
 }
 
-//***************
-// PIXEL SHADER *
-//***************
-float4 MainPS(GS_DATA input) : SV_TARGET
-{
-    input.Normal=normalize(input.Normal);
-	float diffuseStrength = max(dot(normalize(m_LightDirection),-input.Normal),0.2f); 
-	return float4(gColorDiffuse*diffuseStrength,1.0f);
+//PIXEL SHADER
+//************
+float4 MainPS(GS_DATA input) : SV_TARGET{
+
+	// Sample the texture based on the vertex's texture coordinates and channel
+	float4 texColor = gSpriteTexture.Sample(samPoint, input.TexCoord);
+	float channelValue = texColor[input.Channel];
+
+	// Colorize the vertex color based on the sampled channel value
+	float4 colorized = input.Color * channelValue;
+
+	return colorized;
 }
 
-//*************
-// TECHNIQUES *
-//*************
-technique10 Default //FXComposer >> Rename to "technique10 Default"
-{
-    pass p0
-    {
-        SetRasterizerState(FrontCulling);
-        SetVertexShader(CompileShader(vs_4_0, MainVS()));
-		SetGeometryShader(CompileShader(gs_4_0, SpikeGenerator()));
-        SetPixelShader(CompileShader(ps_4_0, MainPS()));
-    }
+
+
+// Default Technique
+technique10 Default {
+
+	pass p0 {
+		SetRasterizerState(BackCulling);
+		SetBlendState(EnableBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+		SetVertexShader(CompileShader(vs_4_0, MainVS()));
+		SetGeometryShader(CompileShader(gs_4_0, MainGS()));
+		SetPixelShader(CompileShader(ps_4_0, MainPS()));
+	}
 }
