@@ -14,4 +14,6 @@ protected:
 	void Update(const SceneContext&) override;
 private:
 	SpriteComponent* m_pSpriteComp;
+	SpriteFont* m_pFont;
+	XMFLOAT2 m_dimensions;
 };

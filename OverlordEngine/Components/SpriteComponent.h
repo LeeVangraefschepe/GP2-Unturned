@@ -18,6 +18,7 @@ public:
 	void SetPivot(const XMFLOAT2& pivot) { m_Pivot = pivot; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
 	void SetTexture(const std::wstring& spriteAsset);
+	void SetDepth(float depth);
 	void SetDimensions(float width, float height);
 
 protected:
@@ -26,6 +27,7 @@ protected:
 
 private:
 	TextureData* m_pTexture{};
+	float m_depth{0.2f};
 	std::wstring m_SpriteAsset{};
 	XMFLOAT2 m_Pivot{};
 	XMFLOAT4 m_Color{};
