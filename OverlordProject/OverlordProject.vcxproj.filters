@@ -16,6 +16,8 @@
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Prefabs\Character.cpp" />
     <ClCompile Include="Prefabs\ButtonPrefab.cpp" />
+    <ClCompile Include="Scenes\MapScene.cpp" />
+    <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -32,5 +34,7 @@
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Prefabs\Character.h" />
     <ClInclude Include="Prefabs\ButtonPrefab.h" />
+    <ClInclude Include="Scenes\MapScene.h" />
+    <ClInclude Include="Prefabs\BuildingPrefab.h" />
   </ItemGroup>
 </Project>

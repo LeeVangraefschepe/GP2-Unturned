@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainMenuScene.h"
 
+
 #include "Prefabs/ButtonPrefab.h"
 
 MainMenuScene::MainMenuScene() :
@@ -13,19 +14,25 @@ void MainMenuScene::Initialize()
 	m_SceneContext.settings.showInfoOverlay = false;
 	m_SceneContext.settings.drawPhysXDebug = false;
 	m_SceneContext.settings.enableOnGUI = false;
-	m_SceneContext.settings.clearColor = XMFLOAT4{ 0.f,0.f,0.f,1.f };
+	m_SceneContext.settings.clearColor = XMFLOAT4{ 0.1f,0.1f,0.1f,1.f };
 
-	const auto startButton = new ButtonPrefab{ L"Textures/Banner.png", XMFLOAT2{100,100} };
-	AddChild(startButton);
+	m_pButtonStart = new ButtonPrefab{ L"Textures/PlayButton.png", XMFLOAT2{300,100} };
+	m_pButtonStart->GetTransform()->Translate(0.f, m_SceneContext.windowHeight / 4.f, 0.f);
+	AddChild(m_pButtonStart);
 
-	m_pSprite = new GameObject();
-	const auto spriteComp = m_pSprite->AddComponent(new SpriteComponent(L"Textures/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
+	const auto backgroundImage = new GameObject();
+	const auto spriteComp = backgroundImage->AddComponent(new SpriteComponent(L"Textures/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
 	spriteComp->SetDimensions(m_SceneContext.windowWidth, m_SceneContext.windowHeight);
-	AddChild(m_pSprite);
+	AddChild(backgroundImage);
 }
 
 void MainMenuScene::Update()
 {
+	if (m_pButtonStart->IsClicked())
+	{
+		m_pButtonStart->Reset();
+		SceneManager::Get()->SetActiveGameScene(L"MapScene");
+	}
 }
 
 void MainMenuScene::Draw()

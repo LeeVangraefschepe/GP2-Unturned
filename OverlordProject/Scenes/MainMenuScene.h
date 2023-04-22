@@ -1,4 +1,6 @@
 #pragma once
+class ButtonPrefab;
+
 class MainMenuScene : public GameScene
 {
 public:
@@ -17,6 +19,6 @@ protected:
 	void OnGUI() override;
 	void PostInitialize() override;
 private:
-	GameObject* m_pSprite{};
+	ButtonPrefab* m_pButtonStart{};
 	float m_TotalRotation{};
 };

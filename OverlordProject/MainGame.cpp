@@ -2,6 +2,7 @@
 #include "MainGame.h"
 
 #include "Scenes/MainMenuScene.h"
+#include "Scenes/MapScene.h"
 
 //Game is preparing
 void MainGame::OnGamePreparing(GameContext& gameContext)
@@ -17,6 +18,7 @@ void MainGame::OnGamePreparing(GameContext& gameContext)
 void MainGame::Initialize()
 {
 	SceneManager::Get()->AddGameScene(new MainMenuScene());
+	SceneManager::Get()->AddGameScene(new MapScene());
 }
 
 LRESULT MainGame::WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

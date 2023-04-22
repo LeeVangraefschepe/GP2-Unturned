@@ -5,6 +5,9 @@ public:
 	ButtonPrefab(const std::wstring& texture, XMFLOAT2 dimensions);
 	~ButtonPrefab() override = default;
 
+	bool IsClicked() const { return m_isClicked;  }
+	void Reset() { m_isClicked = false; }
+
 	ButtonPrefab(const ButtonPrefab& other) = delete;
 	ButtonPrefab(ButtonPrefab&& other) noexcept = delete;
 	ButtonPrefab& operator=(const ButtonPrefab& other) = delete;
@@ -14,6 +17,6 @@ protected:
 	void Update(const SceneContext&) override;
 private:
 	SpriteComponent* m_pSpriteComp;
-	SpriteFont* m_pFont;
 	XMFLOAT2 m_dimensions;
+	bool m_isClicked{};
 };

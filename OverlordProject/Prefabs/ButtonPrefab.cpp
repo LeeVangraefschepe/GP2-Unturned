@@ -6,7 +6,6 @@ m_dimensions(dimensions)
 {
 	m_pSpriteComp = AddComponent(new SpriteComponent(texture, { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
 	m_pSpriteComp->SetDimensions(dimensions.x, dimensions.y);
-	m_pFont = ContentManager::Load<SpriteFont>(L"SpriteFonts/Consolas_32.fnt");
 }
 
 void ButtonPrefab::Initialize(const SceneContext&)
@@ -16,7 +15,6 @@ void ButtonPrefab::Initialize(const SceneContext&)
 
 void ButtonPrefab::Update(const SceneContext&)
 {
-	TextRenderer::Get()->DrawText(m_pFont, StringUtil::utf8_decode("Hello world!"), XMFLOAT2{50,50}, { 1.f,1.f,1.f,1.f });
 	auto& mousePos = InputManager::GetMousePosition();
 	auto& position = GetTransform()->GetPosition();
 
@@ -25,7 +23,7 @@ void ButtonPrefab::Update(const SceneContext&)
 	{
 		if (InputManager::IsMouseButton(InputState::released, 1))
 		{
-			std::cout << "Clicked\n";
+			m_isClicked = true;
 		}
 	}
 }

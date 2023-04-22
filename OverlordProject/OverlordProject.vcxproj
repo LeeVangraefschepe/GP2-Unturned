@@ -93,6 +93,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
+    <ClCompile Include="Scenes\MapScene.cpp" />
     <ClCompile Include="Prefabs\ButtonPrefab.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Prefabs\BoneObject.cpp" />
@@ -127,6 +129,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Prefabs\BuildingPrefab.h" />
+    <ClInclude Include="Scenes\MapScene.h" />
     <ClInclude Include="Prefabs\ButtonPrefab.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Prefabs\BoneObject.h" />
