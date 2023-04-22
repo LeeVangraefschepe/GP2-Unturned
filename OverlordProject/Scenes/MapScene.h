@@ -1,4 +1,6 @@
 #pragma once
+class Character;
+
 class MapScene : public GameScene
 {
 public:
@@ -16,5 +18,16 @@ protected:
 	void Draw() override;
 	void OnGUI() override;
 	void PostInitialize() override;
+private:
+	enum InputIds
+	{
+		CharacterMoveLeft,
+		CharacterMoveRight,
+		CharacterMoveForward,
+		CharacterMoveBackward,
+		CharacterJump
+	};
+
+	Character* m_pCharacter{};
 };
 

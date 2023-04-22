@@ -36,5 +36,14 @@
     <ClInclude Include="Prefabs\ButtonPrefab.h" />
     <ClInclude Include="Scenes\MapScene.h" />
     <ClInclude Include="Prefabs\BuildingPrefab.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OverlordProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Lee Vangraefschepe\Downloads\UnturnedLogo.png" />
+    <Image Include="icon1.ico" />
+    <Image Include="C:\Users\Lee Vangraefschepe\Downloads\UnturnedLogo.ico" />
   </ItemGroup>
 </Project>

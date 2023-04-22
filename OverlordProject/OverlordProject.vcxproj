@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Prefabs\BuildingPrefab.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scenes\MapScene.h" />
     <ClInclude Include="Prefabs\ButtonPrefab.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
@@ -145,6 +146,14 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Materials\UberMaterial.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OverlordProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Lee Vangraefschepe\Downloads\UnturnedLogo.ico" />
+    <Image Include="C:\Users\Lee Vangraefschepe\Downloads\UnturnedLogo.png" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

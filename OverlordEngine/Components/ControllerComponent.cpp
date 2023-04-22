@@ -12,6 +12,7 @@ void ControllerComponent::Initialize(const SceneContext& /*sceneContext*/)
 	{
 		const XMFLOAT3& position{ GetTransform()->GetPosition() };
 		m_ControllerDesc.position = PxExtendedVec3{ position.x, position.y, position.z };
+		m_ControllerDesc.height = 1.f;
 		m_ControllerDesc.userData = this;
 
 		const auto& pControllerManager{ GetGameObject()->GetScene()->GetPhysxProxy()->GetControllerManager() };

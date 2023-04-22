@@ -117,12 +117,13 @@ HRESULT OverlordGame::InitializeWindow()
 	WNDCLASS windowClass;
 	ZeroMemory(&windowClass, sizeof(WNDCLASS));
 	windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	windowClass.hIcon = nullptr;
+	windowClass.hIcon = static_cast<HICON>(LoadImage(nullptr, L"Resources/icon.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_SHARED));
 	windowClass.hbrBackground = nullptr;
 	windowClass.style = CS_HREDRAW | CS_VREDRAW;
 	windowClass.lpfnWndProc = WindowsProcedureStatic;
 	windowClass.hInstance = m_hInstance;
 	windowClass.lpszClassName = className;
+
 
 	if(!RegisterClass(&windowClass))
 	{
