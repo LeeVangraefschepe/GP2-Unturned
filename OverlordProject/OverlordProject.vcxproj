@@ -93,6 +93,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MapPrefab.cpp" />
     <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
     <ClCompile Include="Scenes\MapScene.cpp" />
     <ClCompile Include="Prefabs\ButtonPrefab.cpp" />
@@ -129,6 +130,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MapPrefab.h" />
     <ClInclude Include="Prefabs\BuildingPrefab.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scenes\MapScene.h" />

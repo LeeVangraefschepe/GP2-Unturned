@@ -18,6 +18,7 @@
     <ClCompile Include="Prefabs\ButtonPrefab.cpp" />
     <ClCompile Include="Scenes\MapScene.cpp" />
     <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
+    <ClCompile Include="MapPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Scenes\MapScene.h" />
     <ClInclude Include="Prefabs\BuildingPrefab.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="MapPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />
