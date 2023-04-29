@@ -19,6 +19,8 @@
     <ClCompile Include="Scenes\MapScene.cpp" />
     <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
     <ClCompile Include="MapPrefab.cpp" />
+    <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
+    <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -39,6 +41,8 @@
     <ClInclude Include="Prefabs\BuildingPrefab.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="MapPrefab.h" />
+    <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
+    <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

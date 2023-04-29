@@ -2,6 +2,7 @@
 #include "MapPrefab.h"
 
 #include "Materials/DiffuseMaterial.h"
+#include "Materials/Shadow/DiffuseMaterial_Shadow.h"
 #include "Prefabs/BuildingPrefab.h"
 #include "Prefabs/CubePrefab.h"
 
@@ -11,9 +12,9 @@ MapPrefab::MapPrefab()
 	const auto pDefaultMaterial = pPhysx.createMaterial(0.5f, 0.5f, 0.5f);
 
 	//Materials
-	const auto ppMillitaryMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial>();
+	const auto ppMillitaryMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	ppMillitaryMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
-	const auto pRoadMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial>();
+	const auto pRoadMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	pRoadMaterial->SetDiffuseTexture(L"Textures/Road.png");
 
 

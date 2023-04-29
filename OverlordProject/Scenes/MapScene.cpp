@@ -13,6 +13,8 @@ MapScene::MapScene() :
 
 void MapScene::Initialize()
 {
+	m_SceneContext.pLights->SetDirectionalLight({ -950.6139526f,66.1346436f,-410.1850471f }, { 0.740129888f, -0.597205281f, 0.309117377f });
+
 	m_SceneContext.settings.enableOnGUI = true;
 	auto& pPhysx = PxGetPhysics();
 
