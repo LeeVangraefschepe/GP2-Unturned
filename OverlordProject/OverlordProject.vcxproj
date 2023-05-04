@@ -93,7 +93,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MapPrefab.cpp" />
+    <ClCompile Include="Parser\WorldParser.cpp" />
+    <ClCompile Include="Prefabs\MapPrefab.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.cpp" />
     <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
@@ -132,7 +133,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MapPrefab.h" />
+    <ClInclude Include="Parser\WorldParser.h" />
+    <ClInclude Include="Prefabs\MapPrefab.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.h" />
     <ClInclude Include="Prefabs\BuildingPrefab.h" />

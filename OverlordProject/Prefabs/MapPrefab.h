@@ -10,6 +10,8 @@ public:
 	MapPrefab& operator=(const MapPrefab& other) = delete;
 	MapPrefab& operator=(MapPrefab&& other) noexcept = delete;
 private:
-	void CreateGroundPlane(const PxMaterial* material , const XMFLOAT3& size);
+	void CreateGroundPlane(const PxMaterial* physMaterial, const XMFLOAT3& size);
+	void LoadRoad(const PxMaterial* physMaterial);
+	void LoadHouses(const PxMaterial* physMaterial);
 };
 

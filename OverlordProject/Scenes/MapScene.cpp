@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "MapScene.h"
 
-#include "MapPrefab.h"
 #include "Materials/ColorMaterial.h"
 #include "Materials/DiffuseMaterial.h"
 #include "Materials/UberMaterial.h"
 #include "Prefabs/BuildingPrefab.h"
 #include "Prefabs/Character.h"
+#include "Prefabs/MapPrefab.h"
 
 MapScene::MapScene() :
 	GameScene(L"MapScene") {}
@@ -16,6 +16,7 @@ void MapScene::Initialize()
 	m_SceneContext.pLights->SetDirectionalLight({ -950.6139526f,66.1346436f,-410.1850471f }, { 0.740129888f, -0.597205281f, 0.309117377f });
 
 	m_SceneContext.settings.enableOnGUI = true;
+	m_SceneContext.settings.vSyncEnabled = false;
 	auto& pPhysx = PxGetPhysics();
 
 	//Ground plane
@@ -44,11 +45,18 @@ void MapScene::Initialize()
 	inputAction = InputAction(CharacterJump, InputState::pressed, VK_SPACE, -1, XINPUT_GAMEPAD_A);
 	m_SceneContext.pInput->AddInputAction(inputAction);
 
-	AddChild(new MapPrefab{});
+	m_pMap = new MapPrefab{};
+	AddChild(m_pMap);
 }
 
 void MapScene::Update()
 {
+	if (InputManager::IsKeyboardKey(InputState::pressed, 'R'))
+	{
+		RemoveChild(m_pMap, true);
+		m_pMap = new MapPrefab{};
+		AddChild(m_pMap);
+	}
 }
 
 void MapScene::Draw()
