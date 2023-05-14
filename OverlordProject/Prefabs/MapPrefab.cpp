@@ -11,16 +11,6 @@ MapPrefab::MapPrefab()
 	auto& pPhysx = PxGetPhysics();
 	const auto pDefaultMaterial = pPhysx.createMaterial(0.5f, 0.5f, 0.5f);
 
-	//Materials
-	const auto ppMillitaryMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	ppMillitaryMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
-
-	//Create simple building
-	//AddChild(new BuildingPrefab{ L"Meshes/Buildings/Model_0", ppMillitaryMaterial, pDefaultMaterial, XMFLOAT3{20,0,0}, XMFLOAT3{} });
-	//AddChild(new BuildingPrefab{ L"Meshes/Buildings/Model_1", ppMillitaryMaterial, pDefaultMaterial, XMFLOAT3{20,0,0}, XMFLOAT3{} });
-	//AddChild(new BuildingPrefab{ L"Meshes/Buildings/Model_2", ppMillitaryMaterial, pDefaultMaterial, XMFLOAT3{-20,0,0}, XMFLOAT3{} });
-	//AddChild(new BuildingPrefab{ L"Meshes/Buildings/Model_3", ppMillitaryMaterial, pDefaultMaterial, XMFLOAT3{-40,0,0}, XMFLOAT3{} });
-
 	LoadRoad(pDefaultMaterial);
 	LoadHouses(pDefaultMaterial);
 
@@ -69,10 +59,36 @@ void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 	const auto ppMillitaryMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	ppMillitaryMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
 
+	const auto ppFireMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
+	ppFireMaterial->SetDiffuseTexture(L"Textures/FireBuilding.png");
+
+
+	constexpr int amountOfBuildingMaterials{ 3 };
+	std::vector<DiffuseMaterial_Shadow*> averageBuildingMaterial{};
+	averageBuildingMaterial.reserve(amountOfBuildingMaterials);
+
+	for (int i{}; i < amountOfBuildingMaterials; ++i)
+	{
+		auto tempMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
+		std::wstringstream ss{};
+		ss << "Textures/Buildings/" << i << L".png";
+		tempMaterial->SetDiffuseTexture(ss.str());
+		averageBuildingMaterial.push_back(tempMaterial);
+	}
+
 	constexpr WorldParser worldParser{};
 	const auto houses = worldParser.HouseLoader(L"Resources/Maps/0/House.data");
 	for (auto& house : houses)
 	{
-		AddChild(new BuildingPrefab{ L"Meshes/Buildings/" + house.name, ppMillitaryMaterial, physMaterial, XMFLOAT3{house.x,house.y,house.z}, XMFLOAT3{0,house.rotation,0} });
+		auto material = ppMillitaryMaterial;
+		if (house.name == L"Model_2")
+		{
+			material = ppFireMaterial;
+		}
+		else if (house.name == L"Model_0")
+		{
+			material = averageBuildingMaterial[rand() % amountOfBuildingMaterials];
+		}
+		AddChild(new BuildingPrefab{ L"Meshes/Buildings/" + house.name, material, physMaterial, XMFLOAT3{house.x,house.y,house.z}, XMFLOAT3{0,house.rotation,0} });
 	}
 }
