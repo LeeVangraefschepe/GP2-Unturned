@@ -11,8 +11,8 @@ BuildingPrefab::BuildingPrefab(const std::wstring& path, BaseMaterial* material,
 	const auto buildingConvex = ContentManager::Load<PxTriangleMesh>(path + L".ovpt");
 	staticRb->AddCollider(PxTriangleMeshGeometry{ buildingConvex }, *physMaterial);
 
-	GetTransform()->Rotate(90.f + rotation.x, 0.f + rotation.y, 0.f + rotation.z);
+	GetTransform()->Rotate(90.f + rotation.x, 180.f + rotation.y, 0.f + rotation.z);
 	GetTransform()->Translate(position);
-	staticRb->GetTransform()->Rotate(90.f + rotation.x, 0.f + rotation.y, 0.f + rotation.z);
+	staticRb->GetTransform()->Rotate(90.f + rotation.x, 180.f + rotation.y, 0.f + rotation.z);
 	staticRb->GetTransform()->Translate(position);
 }
