@@ -13,6 +13,7 @@ MapPrefab::MapPrefab()
 
 	LoadRoad(pDefaultMaterial);
 	LoadHouses(pDefaultMaterial);
+	LoadItemSpawns(pDefaultMaterial);
 
 	CreateGroundPlane(pDefaultMaterial, XMFLOAT3{ 0.f,-0.5f,0.f });
 }
@@ -90,5 +91,18 @@ void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 			material = averageBuildingMaterial[rand() % amountOfBuildingMaterials];
 		}
 		AddChild(new BuildingPrefab{ L"Meshes/Buildings/" + house.name, material, physMaterial, XMFLOAT3{house.x,house.y,house.z}, XMFLOAT3{0,house.rotation,0} });
+	}
+}
+
+void MapPrefab::LoadItemSpawns(const PxMaterial* physMaterial)
+{
+	const auto pistolMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
+	pistolMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
+
+	constexpr WorldParser worldParser{};
+	const auto items = worldParser.ItemSpawnLoader(L"Resources/Maps/0/Items.data");
+	for (auto& item : items)
+	{
+		AddChild(new BuildingPrefab{ L"Meshes/Items/" + item.name, pistolMaterial, physMaterial, XMFLOAT3{item.x,item.y,item.z}, XMFLOAT3{0,90,0} });
 	}
 }
