@@ -3,8 +3,7 @@
 
 #include "Materials/Shadow/DiffuseMaterial_Shadow.h"
 #include "Parser/WorldParser.h"
-#include "Prefabs/BuildingPrefab.h"
-#include "Prefabs/CubePrefab.h"
+#include "Prefabs/Map/BuildingPrefab.h"
 
 MapPrefab::MapPrefab()
 {

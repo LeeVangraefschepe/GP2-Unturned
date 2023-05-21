@@ -93,21 +93,22 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GroundItemPrefab.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
-    <ClCompile Include="Prefabs\MapPrefab.cpp" />
+    <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.cpp" />
-    <ClCompile Include="Prefabs\BuildingPrefab.cpp" />
+    <ClCompile Include="Prefabs\Map\BuildingPrefab.cpp" />
     <ClCompile Include="Scenes\MapScene.cpp" />
-    <ClCompile Include="Prefabs\ButtonPrefab.cpp" />
+    <ClCompile Include="Prefabs\UI\ButtonPrefab.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
-    <ClCompile Include="Prefabs\BoneObject.cpp" />
+    <ClCompile Include="Prefabs\Overlord\BoneObject.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Prefabs\Character.cpp" />
     <ClCompile Include="Scenes\MainMenuScene.cpp" />
-    <ClCompile Include="Prefabs\CubePrefab.cpp" />
-    <ClCompile Include="Prefabs\SpherePrefab.cpp" />
-    <ClCompile Include="Prefabs\TorusPrefab.cpp" />
+    <ClCompile Include="Prefabs\Overlord\CubePrefab.cpp" />
+    <ClCompile Include="Prefabs\Overlord\SpherePrefab.cpp" />
+    <ClCompile Include="Prefabs\Overlord\TorusPrefab.cpp" />
     <ClCompile Include="Materials\ColorMaterial.cpp" />
     <ClCompile Include="Materials\SpikyMaterial.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -133,22 +134,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GroundItemPrefab.h" />
     <ClInclude Include="Parser\WorldParser.h" />
-    <ClInclude Include="Prefabs\MapPrefab.h" />
+    <ClInclude Include="Prefabs\Map\MapPrefab.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.h" />
-    <ClInclude Include="Prefabs\BuildingPrefab.h" />
+    <ClInclude Include="Prefabs\Map\BuildingPrefab.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scenes\MapScene.h" />
-    <ClInclude Include="Prefabs\ButtonPrefab.h" />
+    <ClInclude Include="Prefabs\UI\ButtonPrefab.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
-    <ClInclude Include="Prefabs\BoneObject.h" />
+    <ClInclude Include="Prefabs\Overlord\BoneObject.h" />
     <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Prefabs\Character.h" />
     <ClInclude Include="Scenes\MainMenuScene.h" />
-    <ClInclude Include="Prefabs\CubePrefab.h" />
-    <ClInclude Include="Prefabs\SpherePrefab.h" />
-    <ClInclude Include="Prefabs\TorusPrefab.h" />
+    <ClInclude Include="Prefabs\Overlord\CubePrefab.h" />
+    <ClInclude Include="Prefabs\Overlord\SpherePrefab.h" />
+    <ClInclude Include="Prefabs\Overlord\TorusPrefab.h" />
     <ClInclude Include="Materials\ColorMaterial.h" />
     <ClInclude Include="Materials\SpikyMaterial.h" />
     <ClInclude Include="stdafx.h" />

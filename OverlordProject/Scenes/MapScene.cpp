@@ -4,9 +4,9 @@
 #include "Materials/ColorMaterial.h"
 #include "Materials/DiffuseMaterial.h"
 #include "Materials/UberMaterial.h"
-#include "Prefabs/BuildingPrefab.h"
+#include "Prefabs/Map/BuildingPrefab.h"
 #include "Prefabs/Character.h"
-#include "Prefabs/MapPrefab.h"
+#include "Prefabs/Map/MapPrefab.h"
 
 MapScene::MapScene() :
 	GameScene(L"MapScene") {}

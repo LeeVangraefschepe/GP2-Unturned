@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "MainMenuScene.h"
 
-
-#include "Prefabs/ButtonPrefab.h"
+#include "Prefabs/UI/ButtonPrefab.h"
 
 MainMenuScene::MainMenuScene() :
 	GameScene(L"MainMenuScene") {}
