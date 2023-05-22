@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MapScene.h"
 
+#include "Components/Player/ItemPicker.h"
 #include "Materials/ColorMaterial.h"
 #include "Materials/DiffuseMaterial.h"
 #include "Materials/UberMaterial.h"
@@ -33,6 +34,8 @@ void MapScene::Initialize()
 	characterDesc.actionId_Jump = CharacterJump;
 	m_pCharacter = AddChild(new Character(characterDesc));
 	m_pCharacter->GetTransform()->Translate(0.f, 10.f, 0.f);
+
+	m_pCharacter->AddComponent(new ItemPicker{});
 
 	auto inputAction = InputAction(CharacterMoveLeft, InputState::down, 'Q');
 	m_SceneContext.pInput->AddInputAction(inputAction);

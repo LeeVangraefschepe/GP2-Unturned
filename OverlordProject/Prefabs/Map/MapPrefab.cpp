@@ -1,9 +1,10 @@
 ﻿#include "stdafx.h"
 #include "MapPrefab.h"
 
+#include "BuildingPrefab.h"
 #include "Materials/Shadow/DiffuseMaterial_Shadow.h"
 #include "Parser/WorldParser.h"
-#include "Prefabs/Map/BuildingPrefab.h"
+#include "Prefabs/Entity/GroundItem.h"
 
 MapPrefab::MapPrefab()
 {
@@ -12,7 +13,7 @@ MapPrefab::MapPrefab()
 
 	LoadRoad(pDefaultMaterial);
 	LoadHouses(pDefaultMaterial);
-	LoadItemSpawns(pDefaultMaterial);
+	LoadItemSpawns();
 
 	CreateGroundPlane(pDefaultMaterial, XMFLOAT3{ 0.f,-0.5f,0.f });
 }
@@ -93,7 +94,7 @@ void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 	}
 }
 
-void MapPrefab::LoadItemSpawns(const PxMaterial* physMaterial)
+void MapPrefab::LoadItemSpawns()
 {
 	const auto pistolMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	pistolMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
@@ -102,6 +103,6 @@ void MapPrefab::LoadItemSpawns(const PxMaterial* physMaterial)
 	const auto items = worldParser.ItemSpawnLoader(L"Resources/Maps/0/Items.data");
 	for (auto& item : items)
 	{
-		AddChild(new BuildingPrefab{ L"Meshes/Items/" + item.name, pistolMaterial, physMaterial, XMFLOAT3{item.x,item.y,item.z}, XMFLOAT3{0,90,0} });
+		AddChild(new GroundItem{ item.name, XMFLOAT3{item.x,item.y,item.z} });
 	}
 }

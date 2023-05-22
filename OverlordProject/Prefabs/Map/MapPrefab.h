@@ -13,6 +13,6 @@ private:
 	void CreateGroundPlane(const PxMaterial* physMaterial, const XMFLOAT3& size);
 	void LoadRoad(const PxMaterial* physMaterial);
 	void LoadHouses(const PxMaterial* physMaterial);
-	void LoadItemSpawns(const PxMaterial* physMaterial);
+	void LoadItemSpawns();
 };
 

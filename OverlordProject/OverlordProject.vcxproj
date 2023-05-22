@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)OverlordEngine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -81,7 +81,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)OverlordEngine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,6 +93,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Player\ItemPicker.cpp" />
+    <ClCompile Include="Prefabs\Entity\GroundItem.cpp" />
     <ClCompile Include="GroundItemPrefab.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
     <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
@@ -134,6 +136,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Player\ItemPicker.h" />
+    <ClInclude Include="Prefabs\Entity\GroundItem.h" />
     <ClInclude Include="GroundItemPrefab.h" />
     <ClInclude Include="Parser\WorldParser.h" />
     <ClInclude Include="Prefabs\Map\MapPrefab.h" />
