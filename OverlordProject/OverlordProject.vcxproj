@@ -94,8 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
-    <ClCompile Include="Prefabs\Entity\GroundItem.cpp" />
-    <ClCompile Include="GroundItemPrefab.cpp" />
+    <ClCompile Include="Components\Item\GroundItem.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
     <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
@@ -137,8 +136,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Player\ItemPicker.h" />
-    <ClInclude Include="Prefabs\Entity\GroundItem.h" />
-    <ClInclude Include="GroundItemPrefab.h" />
+    <ClInclude Include="Items.h" />
+    <ClInclude Include="Components\Item\GroundItem.h" />
     <ClInclude Include="Parser\WorldParser.h" />
     <ClInclude Include="Prefabs\Map\MapPrefab.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />

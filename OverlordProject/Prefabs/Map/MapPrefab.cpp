@@ -4,7 +4,7 @@
 #include "BuildingPrefab.h"
 #include "Materials/Shadow/DiffuseMaterial_Shadow.h"
 #include "Parser/WorldParser.h"
-#include "Prefabs/Entity/GroundItem.h"
+#include "Components/Item/GroundItem.h"
 
 MapPrefab::MapPrefab()
 {
@@ -103,6 +103,6 @@ void MapPrefab::LoadItemSpawns()
 	const auto items = worldParser.ItemSpawnLoader(L"Resources/Maps/0/Items.data");
 	for (auto& item : items)
 	{
-		AddChild(new GroundItem{ item.name, XMFLOAT3{item.x,item.y,item.z} });
+		AddChild(new GameObject{})->AddComponent(new GroundItem{ item.name, XMFLOAT3{item.x, item.y, item.z } });
 	}
 }

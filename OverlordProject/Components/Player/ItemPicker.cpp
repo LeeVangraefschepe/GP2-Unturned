@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ItemPicker.h"
 
+#include "../Item/GroundItem.h"
+
 ItemPicker::ItemPicker()
 {
 }
@@ -28,11 +30,14 @@ void ItemPicker::Update(const SceneContext& sceneContext)
 	//Raycast
 	if (PxRaycastBuffer hit{}; GetScene()->GetPhysxProxy()->Raycast(rayOrigin, rayDirection.getNormalized(), maxDistance, hit, PxHitFlag::eDEFAULT, filterData))
 	{
-		std::cout << "HIT item\n";
 		auto gameobject = static_cast<BaseComponent*>(hit.block.actor->userData)->GetGameObject();
 		if (InputManager::IsKeyboardKey(InputState::pressed, 'F'))
 		{
-			std::cout << "Picked up item\n";
+			if (const auto groundItem = gameobject->GetComponent<GroundItem>())
+			{
+				std::cout << "Picked up item: " << groundItem->GetItem() << "\n";
+			}
+			
 			gameobject->GetParent()->RemoveChild(gameobject, true);
 		}
 	}

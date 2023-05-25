@@ -22,8 +22,7 @@
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
-    <ClCompile Include="GroundItemPrefab.cpp" />
-    <ClCompile Include="Prefabs\Entity\GroundItem.cpp" />
+    <ClCompile Include="Components\Item\GroundItem.cpp" />
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -48,9 +47,9 @@
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow_Skinned.h" />
     <ClInclude Include="Parser\WorldParser.h" />
-    <ClInclude Include="GroundItemPrefab.h" />
-    <ClInclude Include="Prefabs\Entity\GroundItem.h" />
+    <ClInclude Include="Components\Item\GroundItem.h" />
     <ClInclude Include="Components\Player\ItemPicker.h" />
+    <ClInclude Include="Items.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />
