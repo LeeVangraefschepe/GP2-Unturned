@@ -8,6 +8,7 @@
 #include "Prefabs/Map/BuildingPrefab.h"
 #include "Prefabs/Character.h"
 #include "Prefabs/Map/MapPrefab.h"
+#include "Prefabs/Mob/Zombie.h"
 
 MapScene::MapScene() :
 	GameScene(L"MapScene") {}
@@ -50,6 +51,9 @@ void MapScene::Initialize()
 
 	m_pMap = new MapPrefab{};
 	AddChild(m_pMap);
+
+	auto zombie = new Zombie{{10,0,10}};
+	AddChild(zombie);
 }
 
 void MapScene::Update()

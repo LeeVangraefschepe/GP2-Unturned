@@ -1,0 +1,45 @@
+﻿{
+    "Zombie": {
+        "Version": "1.10.1822.1",
+        "Scene": {
+            "Name": true,
+            "SupportShaderSelect": true
+        },
+        "Export Directory": "D:/Graphics programming 2/GP2-Unturned/OverlordProject/Resources",
+        "Object": {
+            "Zombie": {
+                "Generation": "AccuRig",
+                "Physics": {},
+                "Meshes": {
+                    "pCube1": {
+                        "Materials": {
+                            "aiStandardSurface1SG_Pbr": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "Ambient Color": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "Specular Color": [
+                                    255.0,
+                                    255.0,
+                                    255.0
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

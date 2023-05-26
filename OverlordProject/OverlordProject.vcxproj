@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
     <ClCompile Include="Components\Item\GroundItem.cpp" />
+    <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
     <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
@@ -128,6 +129,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Materials\UberMaterial.cpp" />
+    <ClCompile Include="Prefabs\Mob\Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OverlordEngine\OverlordEngine.vcxproj">
@@ -138,6 +140,7 @@
     <ClInclude Include="Components\Player\ItemPicker.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />
+    <ClInclude Include="Prefabs\Mob\MobManager.h" />
     <ClInclude Include="Parser\WorldParser.h" />
     <ClInclude Include="Prefabs\Map\MapPrefab.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Materials\UberMaterial.h" />
+    <ClInclude Include="Prefabs\Mob\Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />
