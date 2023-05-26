@@ -62,6 +62,8 @@ public:
 
 	PxRigidActor* GetPxRigidActor() const { return m_pActor; };
 	void AddForce(const XMFLOAT3& force, PxForceMode::Enum mode = PxForceMode::eFORCE, bool autowake = true) const;
+	void SetVelocity(const XMFLOAT3& velocity, bool autowake = true) const;
+	XMFLOAT3 GetVelocity() const;
 	void AddTorque(const XMFLOAT3& torque, PxForceMode::Enum mode = PxForceMode::eFORCE, bool autowake = true) const;
 	void ClearForce(PxForceMode::Enum mode = PxForceMode::eFORCE) const;
 	void ClearTorque(PxForceMode::Enum mode = PxForceMode::eFORCE) const;

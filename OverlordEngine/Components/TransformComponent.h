@@ -23,6 +23,8 @@ public:
 	void Rotate(const XMFLOAT3& rotation, bool degrees = true);
 	void Rotate(const XMVECTOR& rotation, bool isQuaternion = true);
 
+	XMFLOAT3 LookAtDirection(const XMFLOAT3& position) const;
+
 	void Scale(float x, float y, float z);
 	void Scale(float s);
 	void Scale(const XMFLOAT3& scale);

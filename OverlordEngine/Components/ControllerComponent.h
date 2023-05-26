@@ -16,6 +16,7 @@ public:
 
 	void SetCollisionGroup(CollisionGroup groups);
 	void SetCollisionIgnoreGroup(CollisionGroup ignoreGroups);
+	void TranslatePose(const XMFLOAT3& position);
 
 	XMFLOAT3 GetPosition() const;
 	XMFLOAT3 GetFootPosition() const;

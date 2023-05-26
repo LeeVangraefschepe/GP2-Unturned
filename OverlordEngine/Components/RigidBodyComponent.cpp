@@ -266,6 +266,28 @@ void RigidBodyComponent::AddForce(const XMFLOAT3& force, PxForceMode::Enum mode,
 	else
 		Logger::LogWarning(L"Cannot apply a force on a static or kinematic actor");
 }
+
+void RigidBodyComponent::SetVelocity(const XMFLOAT3& velocity, bool autowake) const
+{
+	if (m_pActor != nullptr && !m_IsStatic && !m_IsKinematic)
+		m_pActor->is<PxRigidDynamic>()->setLinearVelocity(PhysxHelper::ToPxVec3(velocity), autowake);
+	else
+		Logger::LogWarning(L"Cannot apply a force on a static or kinematic actor");
+}
+
+XMFLOAT3 RigidBodyComponent::GetVelocity() const
+{
+	if (m_pActor != nullptr && !m_IsStatic && !m_IsKinematic)
+	{
+		auto velocity = m_pActor->is<PxRigidDynamic>()->getLinearVelocity();
+		return { velocity.x, velocity.y, velocity.z };
+	}
+	else
+	{
+		Logger::LogWarning(L"Cannot apply a force on a static or kinematic actor");
+		return {};
+	}
+}
 #pragma warning(pop)
 
 void RigidBodyComponent::AddTorque(const XMFLOAT3& torque, PxForceMode::Enum mode, bool autowake) const

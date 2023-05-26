@@ -165,6 +165,42 @@ void TransformComponent::Rotate(const XMVECTOR& rotation, bool isQuaternion)
 	}
 }
 
+XMFLOAT3 TransformComponent::LookAtDirection(const XMFLOAT3& position) const
+{
+	XMVECTOR eyePosition = XMLoadFloat3(&position);
+	XMVECTOR lookAt = XMLoadFloat3(&m_Position);
+	XMVECTOR forward = XMVectorSubtract(lookAt, eyePosition);
+	forward = XMVector3Normalize(forward);
+
+	float pitch = 0.0f;
+	float yaw = 0.0f;
+	float roll = 0.0f;
+
+	if (XMVector3NearEqual(forward, XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMVectorSet(0.01f, 0.01f, 0.01f, 0.01f)))
+	{
+		pitch = 0.0f;
+		yaw = 0.0f;
+		roll = 0.0f;
+	}
+	else if (XMVector3NearEqual(forward, XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f), XMVectorSet(0.01f, 0.01f, 0.01f, 0.01f)))
+	{
+		pitch = XM_PIDIV2;
+		yaw = 0.0f;
+		roll = 0.0f;
+	}
+	else
+	{
+		XMFLOAT3 forwardFloat3;
+		XMStoreFloat3(&forwardFloat3, forward);
+
+		pitch = asinf(forwardFloat3.y);
+		yaw = atan2f(forwardFloat3.x, forwardFloat3.z);
+		roll = 0.0f;
+	}
+
+	return XMFLOAT3(pitch, yaw, roll);
+}
+
 void TransformComponent::Scale(float x, float y, float z)
 {
 	//if (!CheckConstraints())

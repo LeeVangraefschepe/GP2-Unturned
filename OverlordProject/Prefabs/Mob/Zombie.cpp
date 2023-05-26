@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Zombie.h"
 #include <Materials/DiffuseMaterial_Skinned.h>
+#include <Materials/DiffuseMaterial.h>
 
 void Zombie::UpdateAnimation()
 {
@@ -12,6 +13,35 @@ void Zombie::UpdateAnimation()
 	}
 }
 
+void Zombie::UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPosition, float deltaTime)
+{
+	constexpr float movementSpeed{ 0.1f };
+
+	const XMVECTOR walkingDirection = XMVectorScale(direction, movementSpeed);
+
+	//Get direction to XMFLOAT3
+	XMFLOAT3 velocity{};
+	XMStoreFloat3(&velocity, walkingDirection);
+
+	m_totalVelocity = velocity;
+	if (!(m_pControllerComponent->GetCollisionFlags() & PxControllerCollisionFlag::eCOLLISION_DOWN))
+	{
+		m_totalVelocity.y -= m_fallAcceleration * deltaTime;
+		m_totalVelocity.y = std::max(m_totalVelocity.y, -10.f);
+	}
+	else
+	{
+		m_totalVelocity.y = -0.1f;
+	}
+
+	m_pControllerComponent->Move(m_totalVelocity);
+
+	const XMFLOAT3 lookAtDirection = GetTransform()->LookAtDirection(playerPosition);
+
+	//Apply movement
+	GetTransform()->Rotate(lookAtDirection, false);
+}
+
 Zombie::Zombie(const XMFLOAT3& position)
 {
 	GetTransform()->Translate(position);
@@ -19,32 +49,45 @@ Zombie::Zombie(const XMFLOAT3& position)
 
 void Zombie::Initialize(const SceneContext&)
 {
+	m_pVisuals = new GameObject{};
+	AddChild(m_pVisuals);
 	const auto pSkinnedMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Skinned>();
 	pSkinnedMaterial->SetDiffuseTexture(L"Textures/Mobs/Zombie.png");
 
-	const auto pModel = AddComponent(new ModelComponent(L"Meshes/Mobs/Zombie.ovm"));
+	const auto pModel = m_pVisuals->AddComponent(new ModelComponent(L"Meshes/Mobs/Zombie.ovm"));
 	pModel->SetMaterial(pSkinnedMaterial);
 
+	m_pVisuals->GetTransform()->Translate(0, -1, 0);
+
 	const auto pMaterial = PxGetPhysics().createMaterial(.5f, .5f, .5f);
-
-	m_pRigidBody = AddComponent(new RigidBodyComponent{ false });
-	m_pRigidBody->AddCollider(PxBoxGeometry{ 0.5f,1.f,0.5f }, *pMaterial, false, PxTransform{{0,1.f,0}});
-
+	
 	m_pAnimator = pModel->GetAnimator();
 	m_pAnimator->SetAnimation(m_animationClipId);
 	m_pAnimator->Play();
+
+	auto controller = PxCapsuleControllerDesc{};
+	controller.setToDefault();
+	controller.radius = 0.75f;
+	controller.height = 2.f;
+	controller.material = pMaterial;
+	m_pControllerComponent = new ControllerComponent{ controller };
+	AddComponent(m_pControllerComponent);
 }
 
 void Zombie::Update(const SceneContext& sceneContext)
 {
-	const auto& playerPosition = sceneContext.pCamera->GetTransform()->GetWorldPosition();
+	auto playerPosition = sceneContext.pCamera->GetTransform()->GetWorldPosition();
 	const auto& position = GetTransform()->GetWorldPosition();
-
-	const XMVECTOR vector = XMLoadFloat3(&playerPosition) - XMLoadFloat3(&position);
+	playerPosition.y = position.y;
+	
+	XMVECTOR vector = XMLoadFloat3(&playerPosition) - XMLoadFloat3(&position);
 	const float distance = XMVectorGetX(XMVector3Length(vector));
-
-	constexpr float range { 10.f };
-
+	
+	//Normalize direction
+	vector = XMVector3Normalize(vector);
+	
+	constexpr float range { 20.f };
+	
 	if (distance >= range) //Idle state
 	{
 		m_animationClipId = 0;
@@ -52,8 +95,8 @@ void Zombie::Update(const SceneContext& sceneContext)
 	else //Player in range
 	{
 		m_animationClipId = 1;
-		
+		UpdateMovement(vector, playerPosition, sceneContext.pGameTime->GetElapsed());
 	}
-
+	
 	UpdateAnimation();
 }

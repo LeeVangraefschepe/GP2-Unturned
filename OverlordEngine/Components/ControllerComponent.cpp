@@ -109,3 +109,25 @@ void ControllerComponent::SetCollisionIgnoreGroup(CollisionGroup ignoreGroups)
 	m_CollisionGroups.word1 = PxU32(ignoreGroups);
 	ApplyFilterData();
 }
+
+void ControllerComponent::TranslatePose(const XMFLOAT3& position)
+{
+	if (m_pController != nullptr)
+	{
+		const auto actor = m_pController->getActor();
+		const auto numShapes = actor->getNbShapes();
+		const auto shapes = new PxShape * [numShapes];
+
+		const auto numPointers = actor->getShapes(shapes, numShapes);
+		for (PxU32 i = 0; i < numPointers; i++)
+		{
+#pragma warning (push)
+#pragma warning (disable: 6385)
+			const auto shape = shapes[i];
+#pragma warning (pop)
+			shape->setLocalPose(PxTransform{ PhysxHelper::ToPxVec3(position) });
+		}
+		delete[] shapes;
+	}
+	
+}
