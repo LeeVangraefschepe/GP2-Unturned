@@ -27,6 +27,7 @@ void MainMenuScene::Initialize()
 
 void MainMenuScene::Update()
 {
+	InputManager::SetForceMouseToCenter(false);
 	if (m_pButtonStart->IsClicked())
 	{
 		m_pButtonStart->Reset();

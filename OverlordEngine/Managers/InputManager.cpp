@@ -34,8 +34,8 @@ void InputManager::Initialize(const GameContext& gameContext)
 		m_pKeyboardState0 = new BYTE[256];
 		m_pKeyboardState1 = new BYTE[256];
 
-		if(!GetKeyboardState(m_pKeyboardState0) ||
-		!GetKeyboardState(m_pKeyboardState1))
+		if (!GetKeyboardState(m_pKeyboardState0) ||
+			!GetKeyboardState(m_pKeyboardState1))
 		{
 			Logger::LogWarning(L"InputManager::Initialize >> Failed to GetKeyboardState.");
 		}
@@ -80,6 +80,8 @@ void InputManager::ForceMouseToCenter(bool force)
 {
 	m_ForceToCenter = force;
 
+	ShowCursor(!force);
+
 	if (force)
 	{
 		POINT mouseCenter{};
@@ -91,6 +93,11 @@ void InputManager::ForceMouseToCenter(bool force)
 
 		SetCursorPos(mouseCenter.x, mouseCenter.y);
 	}
+}
+
+void InputManager::SetForceMouseToCenter(bool force)
+{
+	m_ForceToCenter = force;
 }
 
 void InputManager::UpdateGamepadStates()
@@ -212,7 +219,7 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 {
 	m_Enabled = m_UserEnabled && !overrideEnable;
 
-	if(!m_Enabled && !m_EnableChanged)
+	if (!m_Enabled && !m_EnableChanged)
 	{
 		m_MouseMovement = { 0,0 };
 		m_MouseMovementNormalized = { 0.f,0.f };
@@ -239,17 +246,54 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 
 	//TODO: Refactor Mouse Updates
 	//Update Mouse Position
-	m_OldMousePosition = m_CurrMousePosition;
-	if (GetCursorPos(&m_CurrMousePosition))
+	//m_OldMousePosition = m_CurrMousePosition;
+
+	constexpr bool m_remoteDesktop{ true };
+
+	if (m_ShowCursor != !m_ForceToCenter)
 	{
-		if (m_EnableChanged || !ScreenToClient(m_GameContext.windowHandle, &m_CurrMousePosition))
+		m_ShowCursor = !m_ForceToCenter;
+		ShowCursor(m_ShowCursor);
+	}
+
+	
+	if (!m_remoteDesktop && m_ForceToCenter)
+	{
+		RECT window;
+		GetWindowRect(m_GameContext.windowHandle, &window);
+
+		m_OldMousePosition = m_ForceToCenter ? POINT{ GetSystemMetrics(SM_CXSCREEN) / 2, GetSystemMetrics(SM_CYSCREEN) / 2 } : m_CurrMousePosition;
+		if (GetCursorPos(&m_CurrMousePosition))
 		{
-			m_CurrMousePosition = m_OldMousePosition;
+			if (m_EnableChanged)
+			{
+				// Convert client coordinates to screen coordinates
+				ClientToScreen(m_GameContext.windowHandle, &m_CurrMousePosition);
+
+				m_CurrMousePosition = m_OldMousePosition;
+			}
 		}
+
+		m_MouseMovement.x = m_CurrMousePosition.x - m_OldMousePosition.x;
+		m_MouseMovement.y = m_CurrMousePosition.y - m_OldMousePosition.y;
+
+		if (m_ForceToCenter) SetCursorPos(m_OldMousePosition.x, m_OldMousePosition.y);
+	}
+	else
+	{
+		m_OldMousePosition = m_CurrMousePosition;
+		if (GetCursorPos(&m_CurrMousePosition))
+		{
+			if (m_EnableChanged || !ScreenToClient(m_GameContext.windowHandle, &m_CurrMousePosition))
+			{
+				m_CurrMousePosition = m_OldMousePosition;
+			}
+		}
+
+		m_MouseMovement.x = m_CurrMousePosition.x - m_OldMousePosition.x;
+		m_MouseMovement.y = m_CurrMousePosition.y - m_OldMousePosition.y;
 	}
 	
-	m_MouseMovement.x = m_CurrMousePosition.x - m_OldMousePosition.x;
-	m_MouseMovement.y = m_CurrMousePosition.y - m_OldMousePosition.y;
 
 	//Normalized
 	m_MouseMovementNormalized.x = m_MouseMovement.x > 0 ? 1.f : (m_MouseMovement.x < 0 ? -1.f : 0.f);

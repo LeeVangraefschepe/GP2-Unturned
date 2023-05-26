@@ -47,7 +47,8 @@ void Character::Update(const SceneContext& sceneContext)
 		XMFLOAT2 look{ 0.f, 0.f };
 		//Only if the Left Mouse Button is Down >
 			// Store the MouseMovement in the local 'look' variable (cast is required)
-		if (InputManager::IsMouseButton(InputState::down, 1))
+		//if (InputManager::IsMouseButton(InputState::down, 1))
+		if (true)
 		{
 			const auto& mouseMovement{ InputManager::GetMouseMovement() };
 			look.x = static_cast<float>(mouseMovement.x);

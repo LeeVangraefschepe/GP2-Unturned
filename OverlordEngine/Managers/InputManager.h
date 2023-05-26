@@ -13,6 +13,7 @@ public:
 	static void Release();
 
 	static void ForceMouseToCenter(bool force);
+	static void SetForceMouseToCenter(bool force);
 	static void SetEnabled(bool enabled)
 	{
 		m_UserEnabled = enabled;
@@ -57,6 +58,7 @@ private:
 	static bool m_ConnectedGamepads[XUSER_MAX_COUNT];
 	static bool m_Enabled, m_UserEnabled, m_PrevEnable, m_EnableChanged;
 	static bool m_ForceToCenter;
+	static inline bool m_ShowCursor{true};
 	static GameContext m_GameContext;
 
 	static constexpr int KBCODE_MIN{ 7 };

@@ -58,6 +58,7 @@ void MapScene::Initialize()
 
 void MapScene::Update()
 {
+	InputManager::SetForceMouseToCenter(true);
 	if (InputManager::IsKeyboardKey(InputState::pressed, 'R'))
 	{
 		RemoveChild(m_pMap, true);
