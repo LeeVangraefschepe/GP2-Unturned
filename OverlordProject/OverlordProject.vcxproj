@@ -95,6 +95,8 @@
   <ItemGroup>
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
     <ClCompile Include="Components\Item\GroundItem.cpp" />
+    <ClCompile Include="Components\Other\Health.cpp" />
+    <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
     <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
@@ -113,6 +115,7 @@
     <ClCompile Include="Prefabs\Overlord\TorusPrefab.cpp" />
     <ClCompile Include="Materials\ColorMaterial.cpp" />
     <ClCompile Include="Materials\SpikyMaterial.cpp" />
+    <ClCompile Include="Components\Player\StatsDisplay.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
@@ -138,8 +141,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Player\ItemPicker.h" />
+    <ClInclude Include="Components\Other\Health.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />
+    <ClInclude Include="Prefabs\Player.h" />
     <ClInclude Include="Prefabs\Mob\MobManager.h" />
     <ClInclude Include="Parser\WorldParser.h" />
     <ClInclude Include="Prefabs\Map\MapPrefab.h" />
@@ -159,10 +164,13 @@
     <ClInclude Include="Prefabs\Overlord\TorusPrefab.h" />
     <ClInclude Include="Materials\ColorMaterial.h" />
     <ClInclude Include="Materials\SpikyMaterial.h" />
+    <ClInclude Include="Components\Player\StatsDisplay.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Materials\UberMaterial.h" />
     <ClInclude Include="Prefabs\Mob\Zombie.h" />
+    <ClInclude Include="System\Observer.h" />
+    <ClInclude Include="System\Subject.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

@@ -257,7 +257,7 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 	}
 
 	
-	if (!m_remoteDesktop && m_ForceToCenter)
+	if (m_ForceToCenter && !m_remoteDesktop)
 	{
 		RECT window;
 		GetWindowRect(m_GameContext.windowHandle, &window);

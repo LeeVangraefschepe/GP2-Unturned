@@ -92,3 +92,5 @@ using namespace physx;
 
 //Engine Includes
 #include "OverlordAPI.h"
+#include "System/Observer.h"
+#include "System/Subject.h"
