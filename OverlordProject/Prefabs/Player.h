@@ -18,6 +18,8 @@ public:
 
 	void Initialize(const SceneContext&) override;
 
+	Character* GetPlayerCharacter() const { return m_pCharacter; }
+
 	Player(const Player& other) = delete;
 	Player(Player&& other) noexcept = delete;
 	Player& operator=(const Player& other) = delete;

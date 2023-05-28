@@ -1,21 +1,28 @@
 #pragma once
+#include "Components/Other/Health.h"
+
 class Zombie final : public GameObject
 {
 	ModelAnimator* m_pAnimator{ nullptr };
-	RigidBodyComponent* m_pRigidBody{ nullptr };
 	GameObject* m_pVisuals{ nullptr };
 	ControllerComponent* m_pControllerComponent{ nullptr };
 
 	XMFLOAT3 m_totalVelocity{};
 	float m_fallAcceleration{50.f};
 
+	Health* m_playerHealth{ nullptr };
+	float m_damage{10.f};
+	float m_attackDelay{ 2.f };
+	float m_currentAttackDelay{};
+
 	int m_animationClipId{}, m_lastAnimationClipId{-1};
 
 	void UpdateAnimation();
 	void UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPosition, float deltaTime);
+	void UpdateAttack(float distance, const XMFLOAT3& playerPosition);
 
 public:
-	Zombie(const XMFLOAT3& position);
+	Zombie(const XMFLOAT3& position, GameObject* target);
 	~Zombie() override = default;
 
 	void Initialize(const SceneContext&) override;

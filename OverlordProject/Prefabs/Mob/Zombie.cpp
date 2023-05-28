@@ -42,9 +42,20 @@ void Zombie::UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPos
 	GetTransform()->Rotate(lookAtDirection, false);
 }
 
-Zombie::Zombie(const XMFLOAT3& position)
+void Zombie::UpdateAttack(float distance, const XMFLOAT3&)
+{
+	constexpr float attackRange{ 2.f };
+	if (distance > attackRange) { return; }
+	if (m_currentAttackDelay > 0.f) { return; }
+
+	m_currentAttackDelay = m_attackDelay;
+	m_playerHealth->Damage(m_damage);
+}
+
+Zombie::Zombie(const XMFLOAT3& position, GameObject* target)
 {
 	GetTransform()->Translate(position);
+	m_playerHealth = target->GetComponent<Health>();
 }
 
 void Zombie::Initialize(const SceneContext&)
@@ -76,6 +87,9 @@ void Zombie::Initialize(const SceneContext&)
 
 void Zombie::Update(const SceneContext& sceneContext)
 {
+	const float deltaTime = sceneContext.pGameTime->GetElapsed();
+	m_currentAttackDelay -= deltaTime;
+
 	auto playerPosition = sceneContext.pCamera->GetTransform()->GetWorldPosition();
 	const auto& position = GetTransform()->GetWorldPosition();
 	playerPosition.y = position.y;
@@ -95,7 +109,8 @@ void Zombie::Update(const SceneContext& sceneContext)
 	else //Player in range
 	{
 		m_animationClipId = 1;
-		UpdateMovement(vector, playerPosition, sceneContext.pGameTime->GetElapsed());
+		UpdateMovement(vector, playerPosition, deltaTime);
+		UpdateAttack(distance, playerPosition);
 	}
 	
 	UpdateAnimation();

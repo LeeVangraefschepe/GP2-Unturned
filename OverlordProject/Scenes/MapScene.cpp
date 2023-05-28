@@ -16,11 +16,11 @@ void MapScene::Initialize()
 	m_SceneContext.settings.enableOnGUI = true;
 	m_SceneContext.settings.vSyncEnabled = false;
 
-	AddChild(new Player{ {} });
+	m_pCharacter = AddChild(new Player{ {} })->GetPlayerCharacter();
 
 	m_pMap = AddChild(new MapPrefab{});
 
-	AddChild(new Zombie{ {10,0,10} });
+	AddChild(new Zombie{ {10,0,10}, m_pCharacter});
 }
 
 void MapScene::Update()
