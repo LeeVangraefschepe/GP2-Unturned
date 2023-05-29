@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Zombie.h"
 #include <Materials/DiffuseMaterial_Skinned.h>
-#include <Materials/DiffuseMaterial.h>
 
 void Zombie::UpdateAnimation()
 {

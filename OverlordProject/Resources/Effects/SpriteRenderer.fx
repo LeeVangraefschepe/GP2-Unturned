@@ -18,7 +18,10 @@ BlendState EnableBlending
 
 DepthStencilState NoDepth
 {
-    DepthEnable = FALSE;
+    DepthEnable = false;
+    DepthWriteMask = zero;
+    DepthFunc = less;
+    StencilEnable = false;
 };
 
 RasterizerState BackCulling

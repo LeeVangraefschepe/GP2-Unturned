@@ -15,13 +15,13 @@ void MainMenuScene::Initialize()
 	m_SceneContext.settings.enableOnGUI = false;
 	m_SceneContext.settings.clearColor = XMFLOAT4{ 0.1f,0.1f,0.1f,1.f };
 
-	m_pButtonStart = new ButtonPrefab{ L"Textures/PlayButton.png", XMFLOAT2{300,100} };
+	m_pButtonStart = new ButtonPrefab{ L"Textures/UI/PlayButton.png", XMFLOAT2{300,100} };
 	m_pButtonStart->GetTransform()->Translate(0.f, m_SceneContext.windowHeight / 4.f, 0.f);
 	AddChild(m_pButtonStart);
 
 	const auto backgroundImage = new GameObject();
-	const auto spriteComp = backgroundImage->AddComponent(new SpriteComponent(L"Textures/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
-	spriteComp->SetDimensions(m_SceneContext.windowWidth, m_SceneContext.windowHeight);
+	const auto spriteComp = backgroundImage->AddComponent(new SpriteComponent(L"Textures/UI/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
+	spriteComp->SetDimensions({ m_SceneContext.windowWidth, m_SceneContext.windowHeight });
 	AddChild(backgroundImage);
 }
 

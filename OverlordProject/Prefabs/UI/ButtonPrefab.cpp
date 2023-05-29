@@ -5,7 +5,7 @@ ButtonPrefab::ButtonPrefab(const std::wstring& texture, XMFLOAT2 dimensions) :
 m_dimensions(dimensions)
 {
 	m_pSpriteComp = AddComponent(new SpriteComponent(texture, { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
-	m_pSpriteComp->SetDimensions(dimensions.x, dimensions.y);
+	m_pSpriteComp->SetDimensions({ dimensions.x, dimensions.y });
 }
 
 void ButtonPrefab::Initialize(const SceneContext&)

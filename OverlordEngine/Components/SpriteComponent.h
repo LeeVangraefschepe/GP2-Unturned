@@ -14,20 +14,19 @@ public:
 
 	const XMFLOAT2& GetPivot() const { return m_Pivot; }
 	const XMFLOAT4& GetColor() const { return m_Color; }
+	const XMFLOAT2& GetSize() const;
 
 	void SetPivot(const XMFLOAT2& pivot) { m_Pivot = pivot; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
 	void SetTexture(const std::wstring& spriteAsset);
-	void SetDepth(float depth);
-	void SetDimensions(float width, float height);
+	void SetDimensions(const XMFLOAT2&);
 
 protected:
 	void Initialize(const SceneContext& sceneContext) override;
-	void Draw(const SceneContext& sceneContext) override;
+	void PostDraw(const SceneContext& sceneContext) override;
 
 private:
 	TextureData* m_pTexture{};
-	float m_depth{0.2f};
 	std::wstring m_SpriteAsset{};
 	XMFLOAT2 m_Pivot{};
 	XMFLOAT4 m_Color{};
