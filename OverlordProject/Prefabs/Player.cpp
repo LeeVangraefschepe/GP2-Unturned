@@ -2,6 +2,7 @@
 #include "Player.h"
 
 #include "Components/Other/Health.h"
+#include "Components/Player/Inventory.h"
 #include "Components/Player/ItemPicker.h"
 #include "Components/Player/StatsDisplay.h"
 
@@ -27,13 +28,17 @@ void Player::Initialize(const SceneContext& sceneContext)
 	characterDesc.actionId_Sprint = CharacterSprint;
 	m_pCharacter = AddChild(new Character(characterDesc));
 	m_pCharacter->GetTransform()->Translate(0.f, 10.f, 0.f);
-	m_pCharacter->AddComponent(new ItemPicker{});
+
+	const auto inventory = m_pCharacter->AddComponent(new Inventory{});
+
+	m_pCharacter->AddComponent(new ItemPicker{ inventory });
 
 	const auto health = m_pCharacter->AddComponent(new Health{ 100.f });
 	const auto energy = m_pCharacter->AddComponent(new Energy{ 5.f,2.f });
 	
 	m_pCharacter->AddComponent(new StatsDisplay{ health, energy });
 	m_pCharacter->SetEnergy(energy);
+
 
 	auto inputAction = InputAction(CharacterMoveLeft, InputState::down, 'Q');
 	sceneContext.pInput->AddInputAction(inputAction);

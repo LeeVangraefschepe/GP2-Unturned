@@ -1,8 +1,10 @@
 #pragma once
+#include "Inventory.h"
+
 class ItemPicker : public BaseComponent
 {
 public:
-	ItemPicker();
+	ItemPicker(Inventory* inventory);
 	~ItemPicker() override = default;
 
 	ItemPicker(const ItemPicker& other) = delete;
@@ -13,5 +15,5 @@ public:
 	void Initialize(const SceneContext& sceneContext) override;
 	void Update(const SceneContext&) override;
 private:
+	Inventory* m_inventory{};
 };
-
