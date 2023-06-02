@@ -62,7 +62,7 @@ void Zombie::Initialize(const SceneContext&)
 	m_pVisuals = new GameObject{};
 	AddChild(m_pVisuals);
 	const auto pSkinnedMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Skinned>();
-	pSkinnedMaterial->SetDiffuseTexture(L"Textures/Mobs/Zombie.png");
+	pSkinnedMaterial->SetDiffuseTexture(L"Textures/Mobs/Zombie.dds");
 
 	const auto pModel = m_pVisuals->AddComponent(new ModelComponent(L"Meshes/Mobs/Zombie.ovm"));
 	pModel->SetMaterial(pSkinnedMaterial);

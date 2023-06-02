@@ -29,7 +29,7 @@ void GroundItem::Initialize(const SceneContext&)
 {
 	std::wstringstream ss{};
 	const auto material = MaterialManager::Get()->CreateMaterial<DiffuseMaterial>();
-	ss << L"Textures/Items/" << m_name << L".png";
+	ss << L"Textures/Items/" << m_name << L".dds";
 	material->SetDiffuseTexture(ss.str());
 	ss.str(L"");
 

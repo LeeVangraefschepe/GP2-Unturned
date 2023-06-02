@@ -21,7 +21,7 @@ MapPrefab::MapPrefab()
 void MapPrefab::CreateGroundPlane(const PxMaterial* physMaterial, const XMFLOAT3& position)
 {
 	const auto pGroundMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	pGroundMaterial->SetDiffuseTexture(L"Textures/Ground.png");
+	pGroundMaterial->SetDiffuseTexture(L"Textures/Ground.dds");
 
 	const auto groundPlane = new GameObject{};
 
@@ -42,7 +42,7 @@ void MapPrefab::CreateGroundPlane(const PxMaterial* physMaterial, const XMFLOAT3
 void MapPrefab::LoadRoad(const PxMaterial* physMaterial)
 {
 	const auto pRoadMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	pRoadMaterial->SetDiffuseTexture(L"Textures/Road.png");
+	pRoadMaterial->SetDiffuseTexture(L"Textures/Road.dds");
 
 	const std::wstring straightRoadPath{ L"Meshes/Roads/Model_0" };
 	const std::wstring intersectionRoadPath{ L"Meshes/Roads/Model_1" };
@@ -58,11 +58,10 @@ void MapPrefab::LoadRoad(const PxMaterial* physMaterial)
 void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 {
 	const auto ppMillitaryMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	ppMillitaryMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
+	ppMillitaryMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.dds");
 
 	const auto ppFireMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	ppFireMaterial->SetDiffuseTexture(L"Textures/FireBuilding.png");
-
+	ppFireMaterial->SetDiffuseTexture(L"Textures/FireBuilding.dds");
 
 	constexpr int amountOfBuildingMaterials{ 3 };
 	std::vector<DiffuseMaterial_Shadow*> averageBuildingMaterial{};
@@ -72,7 +71,7 @@ void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 	{
 		auto tempMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 		std::wstringstream ss{};
-		ss << "Textures/Buildings/" << i << L".png";
+		ss << "Textures/Buildings/" << i << L".dds";
 		tempMaterial->SetDiffuseTexture(ss.str());
 		averageBuildingMaterial.push_back(tempMaterial);
 	}
@@ -97,7 +96,7 @@ void MapPrefab::LoadHouses(const PxMaterial* physMaterial)
 void MapPrefab::LoadItemSpawns()
 {
 	const auto pistolMaterial = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
-	pistolMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.png");
+	pistolMaterial->SetDiffuseTexture(L"Textures/MillitaryBuilding.dds");
 
 	constexpr WorldParser worldParser{};
 	const auto items = worldParser.ItemSpawnLoader(L"Resources/Maps/0/Items.data");
