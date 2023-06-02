@@ -8,7 +8,8 @@ class Player final : public GameObject
 		CharacterMoveRight,
 		CharacterMoveForward,
 		CharacterMoveBackward,
-		CharacterJump
+		CharacterJump,
+		CharacterSprint
 	};
 
 	Character* m_pCharacter{};

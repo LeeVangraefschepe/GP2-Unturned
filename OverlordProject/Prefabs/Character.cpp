@@ -89,6 +89,10 @@ void Character::Update(const SceneContext& sceneContext)
 			XMStoreFloat3(&m_CurrentDirection, moveDirection);
 			m_MoveSpeed += curAcceleration;
 			m_MoveSpeed = std::min(m_MoveSpeed, m_CharacterDesc.maxMoveSpeed);
+			if (sceneContext.pInput->IsActionTriggered(m_CharacterDesc.actionId_Sprint) && m_pEnergy->ConsumeEnergy(elapsedSec))
+			{
+				m_MoveSpeed *= 1.5f;
+			}
 		}
 		else
 		{
@@ -119,7 +123,7 @@ void Character::Update(const SceneContext& sceneContext)
 			m_TotalVelocity.y -= m_FallAcceleration * sceneContext.pGameTime->GetElapsed();
 			m_TotalVelocity.y = std::max(m_TotalVelocity.y, -m_CharacterDesc.maxFallSpeed);
 		}
-		else if (sceneContext.pInput->IsActionTriggered(m_CharacterDesc.actionId_Jump))
+		else if (sceneContext.pInput->IsActionTriggered(m_CharacterDesc.actionId_Jump) && m_pEnergy->ConsumeEnergy(1.f))
 		{
 			m_TotalVelocity.y = m_CharacterDesc.JumpSpeed;
 		}

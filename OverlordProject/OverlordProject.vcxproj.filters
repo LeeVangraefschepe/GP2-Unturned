@@ -30,6 +30,7 @@
     <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Components\Player\StatsDisplay.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
+    <ClCompile Include="Components\Player\Energy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -64,6 +65,7 @@
     <ClInclude Include="Prefabs\Player.h" />
     <ClInclude Include="Components\Player\StatsDisplay.h" />
     <ClInclude Include="Materials\Post\PostBloodscale.h" />
+    <ClInclude Include="Components\Player\Energy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

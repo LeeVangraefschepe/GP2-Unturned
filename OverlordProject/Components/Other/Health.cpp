@@ -16,6 +16,7 @@ bool Health::Damage(float amount)
 	m_currentHealth -= amount;
 	if (Died())
 	{
+		m_subject->Notify(damage, this);
 		m_subject->Notify(died, this);
 		m_currentHealth = 0.f;
 		return true;

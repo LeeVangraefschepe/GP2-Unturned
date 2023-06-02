@@ -24,13 +24,16 @@ void Player::Initialize(const SceneContext& sceneContext)
 	characterDesc.actionId_MoveLeft = CharacterMoveLeft;
 	characterDesc.actionId_MoveRight = CharacterMoveRight;
 	characterDesc.actionId_Jump = CharacterJump;
+	characterDesc.actionId_Sprint = CharacterSprint;
 	m_pCharacter = AddChild(new Character(characterDesc));
 	m_pCharacter->GetTransform()->Translate(0.f, 10.f, 0.f);
-
 	m_pCharacter->AddComponent(new ItemPicker{});
 
 	const auto health = m_pCharacter->AddComponent(new Health{ 100.f });
-	m_pCharacter->AddComponent(new StatsDisplay{ health });
+	const auto energy = m_pCharacter->AddComponent(new Energy{ 5.f,2.f });
+	
+	m_pCharacter->AddComponent(new StatsDisplay{ health, energy });
+	m_pCharacter->SetEnergy(energy);
 
 	auto inputAction = InputAction(CharacterMoveLeft, InputState::down, 'Q');
 	sceneContext.pInput->AddInputAction(inputAction);
@@ -41,5 +44,7 @@ void Player::Initialize(const SceneContext& sceneContext)
 	inputAction = InputAction(CharacterMoveBackward, InputState::down, 'S');
 	sceneContext.pInput->AddInputAction(inputAction);
 	inputAction = InputAction(CharacterJump, InputState::pressed, VK_SPACE, -1, XINPUT_GAMEPAD_A);
+	sceneContext.pInput->AddInputAction(inputAction);
+	inputAction = InputAction(CharacterSprint, InputState::down, VK_SHIFT, -1, XINPUT_GAMEPAD_A);
 	sceneContext.pInput->AddInputAction(inputAction);
 }

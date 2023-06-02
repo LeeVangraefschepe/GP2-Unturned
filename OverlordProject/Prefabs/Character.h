@@ -1,4 +1,6 @@
 #pragma once
+#include "Components/Player/Energy.h"
+
 struct CharacterDesc
 {
 	CharacterDesc(
@@ -29,6 +31,7 @@ struct CharacterDesc
 	int actionId_MoveForward{ -1 };
 	int actionId_MoveBackward{ -1 };
 	int actionId_Jump{ -1 };
+	int actionId_Sprint{ -1 };
 };
 
 class Character : public GameObject
@@ -42,6 +45,7 @@ public:
 	Character& operator=(const Character& other) = delete;
 	Character& operator=(Character&& other) noexcept = delete;
 
+	void SetEnergy(Energy* energy) { m_pEnergy = energy; }
 	void DrawImGui();
 
 protected:
@@ -49,6 +53,7 @@ protected:
 	void Update(const SceneContext&) override;
 
 private:
+	Energy* m_pEnergy{};
 	CameraComponent* m_pCameraComponent{};
 	ControllerComponent* m_pControllerComponent{};
 

@@ -20,6 +20,7 @@ void MainMenuScene::Initialize()
 	AddChild(m_pButtonStart);
 
 	const auto backgroundImage = new GameObject();
+	backgroundImage->GetTransform()->Translate(0, 0, 0.1f);
 	const auto spriteComp = backgroundImage->AddComponent(new SpriteComponent(L"Textures/UI/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
 	spriteComp->SetDimensions({ m_SceneContext.windowWidth, m_SceneContext.windowHeight });
 	AddChild(backgroundImage);

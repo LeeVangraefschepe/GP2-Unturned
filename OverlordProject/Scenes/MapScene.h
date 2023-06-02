@@ -31,6 +31,5 @@ private:
 
 	Character* m_pCharacter{};
 	GameObject* m_pMap{};
-	PostBloodscale* m_pPostBloodscale{};
 };
 

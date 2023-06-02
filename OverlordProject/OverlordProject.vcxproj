@@ -96,6 +96,7 @@
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
     <ClCompile Include="Components\Item\GroundItem.cpp" />
     <ClCompile Include="Components\Other\Health.cpp" />
+    <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Components\Player\ItemPicker.h" />
     <ClInclude Include="Components\Other\Health.h" />
+    <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />
     <ClInclude Include="Materials\Post\PostBloodscale.h" />
