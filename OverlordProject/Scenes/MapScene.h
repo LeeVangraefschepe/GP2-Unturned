@@ -1,4 +1,5 @@
 #pragma once
+#include "Materials/Post/PostBloodscale.h"
 class Character;
 
 class MapScene : public GameScene
@@ -30,5 +31,6 @@ private:
 
 	Character* m_pCharacter{};
 	GameObject* m_pMap{};
+	PostBloodscale* m_pPostBloodscale{};
 };
 

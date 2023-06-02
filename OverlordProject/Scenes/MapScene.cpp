@@ -16,6 +16,11 @@ void MapScene::Initialize()
 	m_SceneContext.settings.enableOnGUI = true;
 	m_SceneContext.settings.vSyncEnabled = false;
 
+	m_pPostBloodscale = MaterialManager::Get()->CreateMaterial<PostBloodscale>();
+	AddPostProcessingEffect(m_pPostBloodscale);
+
+	m_pPostBloodscale->SetAmount(5.f);
+
 	m_pCharacter = AddChild(new Player{ {} })->GetPlayerCharacter();
 
 	m_pMap = AddChild(new MapPrefab{});

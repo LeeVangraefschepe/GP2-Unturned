@@ -29,7 +29,7 @@
     <ClCompile Include="Components\Other\Health.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Components\Player\StatsDisplay.cpp" />
-    <ClCompile Include="Scenes\SpriteTestScene.cpp" />
+    <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -63,7 +63,7 @@
     <ClInclude Include="System\Subject.h" />
     <ClInclude Include="Prefabs\Player.h" />
     <ClInclude Include="Components\Player\StatsDisplay.h" />
-    <ClInclude Include="Scenes\SpriteTestScene.h" />
+    <ClInclude Include="Materials\Post\PostBloodscale.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />
