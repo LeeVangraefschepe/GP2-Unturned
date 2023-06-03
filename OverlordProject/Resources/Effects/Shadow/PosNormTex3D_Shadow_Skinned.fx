@@ -2,6 +2,7 @@ float4x4 gWorld : WORLD;
 float4x4 gWorldViewProj : WORLDVIEWPROJECTION; 
 float4x4 gWorldViewProj_Light;
 float3 gLightDirection = float3(-0.577f, -0.577f, 0.577f);
+float gLightIntensity = 1.f;
 float gShadowMapBias = 0.01f;
 float4x4 gBones[70];
 
@@ -145,7 +146,7 @@ float4 PS(VS_OUTPUT input) : SV_TARGET
 	diffuseStrength = saturate(diffuseStrength);
 	color_rgb = color_rgb * diffuseStrength;
 
-	return float4( color_rgb * shadowValue, color_a );
+	return float4( color_rgb * shadowValue * gLightIntensity, color_a );
 }
 
 //--------------------------------------------------------------------------------------

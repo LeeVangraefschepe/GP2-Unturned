@@ -248,7 +248,7 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 	//Update Mouse Position
 	//m_OldMousePosition = m_CurrMousePosition;
 
-	constexpr bool m_remoteDesktop{ true };
+	constexpr bool m_remoteDesktop{ false };
 
 	if (m_ShowCursor != !m_ForceToCenter)
 	{

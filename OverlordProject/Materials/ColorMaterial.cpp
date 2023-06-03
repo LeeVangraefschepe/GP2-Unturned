@@ -10,6 +10,11 @@ void ColorMaterial::InitializeEffectVariables()
 	UseTransparency(false);
 }
 
+void ColorMaterial::OnUpdateModelVariables(const SceneContext& sceneContext, const ModelComponent* ) const
+{
+	SetVariable_Scalar(L"gLightIntensity", sceneContext.pLights->GetDirectionalLight().intensity);
+}
+
 void ColorMaterial::UseTransparency(bool enabled)
 {
 	SetTechnique(enabled ? L"TransparencyTech" : L"Default");

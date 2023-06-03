@@ -16,7 +16,7 @@ void DiffuseMaterial_Skinned::InitializeEffectVariables()
 {
 }
 
-void DiffuseMaterial_Skinned::OnUpdateModelVariables(const SceneContext&, const ModelComponent* pModel) const
+void DiffuseMaterial_Skinned::OnUpdateModelVariables(const SceneContext& sceneContext, const ModelComponent* pModel) const
 {
 	//Retrieve The Animator from the ModelComponent
 	const ModelAnimator* pAnimator{ pModel->GetAnimator() };
@@ -29,4 +29,6 @@ void DiffuseMaterial_Skinned::OnUpdateModelVariables(const SceneContext&, const 
 
 	//Set the 'gBones' variable of the effect (MatrixArray) > BoneTransforms
 	SetVariable_MatrixArray(L"gBones", reinterpret_cast<const float*>(boneTransforms.data()), static_cast<UINT>(boneTransforms.size()));
+
+	SetVariable_Scalar(L"gLightIntensity", sceneContext.pLights->GetDirectionalLight().intensity);
 }

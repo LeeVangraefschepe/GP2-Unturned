@@ -39,6 +39,9 @@ void DiffuseMaterial_Shadow_Skinned::OnUpdateModelVariables(const SceneContext& 
 	SetVariable_Texture(L"gShadowMap", ShadowMapRenderer::Get()->GetShadowMap());
 
 	SetVariable_Vector(L"gLightDirection", sceneContext.pLights->GetDirectionalLight().direction);
+
+	SetVariable_Scalar(L"gLightIntensity", sceneContext.pLights->GetDirectionalLight().intensity);
+
 	const ModelAnimator* pAnimator{ pModel->GetAnimator() };
 	ASSERT_NULL_(pAnimator);
 

@@ -37,4 +37,6 @@ void DiffuseMaterial_Shadow::OnUpdateModelVariables(const SceneContext& sceneCon
 	SetVariable_Texture(L"gShadowMap", ShadowMapRenderer::Get()->GetShadowMap());
 
 	SetVariable_Vector(L"gLightDirection", sceneContext.pLights->GetDirectionalLight().direction);
+
+	SetVariable_Scalar(L"gLightIntensity", sceneContext.pLights->GetDirectionalLight().intensity);
 }

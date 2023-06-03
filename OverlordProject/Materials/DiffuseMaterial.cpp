@@ -15,3 +15,8 @@ void DiffuseMaterial::InitializeEffectVariables()
 {
 
 }
+
+void DiffuseMaterial::OnUpdateModelVariables(const SceneContext& sceneContext, const ModelComponent*) const
+{
+	SetVariable_Scalar(L"gLightIntensity", sceneContext.pLights->GetDirectionalLight().intensity);
+}
