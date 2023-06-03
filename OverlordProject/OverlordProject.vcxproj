@@ -98,6 +98,8 @@
     <ClCompile Include="Components\Other\Health.cpp" />
     <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Components\Player\Inventory.cpp" />
+    <ClCompile Include="Materials\DiffuseMaterial.cpp" />
+    <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Prefabs\Particles\HitParticle.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
@@ -109,9 +111,7 @@
     <ClCompile Include="Prefabs\Map\BuildingPrefab.cpp" />
     <ClCompile Include="Scenes\MapScene.cpp" />
     <ClCompile Include="Prefabs\UI\ButtonPrefab.cpp" />
-    <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Prefabs\Overlord\BoneObject.cpp" />
-    <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Prefabs\Character.cpp" />
     <ClCompile Include="Scenes\MainMenuScene.cpp" />
     <ClCompile Include="Prefabs\Overlord\CubePrefab.cpp" />
@@ -139,6 +139,7 @@
     <ClCompile Include="Prefabs\Mob\Zombie.cpp" />
     <ClCompile Include="Components\Player\WeaponSlot.cpp" />
     <ClCompile Include="Components\Player\WeaponUse.cpp" />
+    <ClCompile Include="Components\Other\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OverlordEngine\OverlordEngine.vcxproj">
@@ -150,6 +151,8 @@
     <ClInclude Include="Components\Other\Health.h" />
     <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Components\Player\Inventory.h" />
+    <ClInclude Include="Materials\DiffuseMaterial.h" />
+    <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Prefabs\Particles\HitParticle.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />
@@ -164,9 +167,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scenes\MapScene.h" />
     <ClInclude Include="Prefabs\UI\ButtonPrefab.h" />
-    <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Prefabs\Overlord\BoneObject.h" />
-    <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Prefabs\Character.h" />
     <ClInclude Include="Scenes\MainMenuScene.h" />
     <ClInclude Include="Prefabs\Overlord\CubePrefab.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="System\Subject.h" />
     <ClInclude Include="Components\Player\WeaponSlot.h" />
     <ClInclude Include="Components\Player\WeaponUse.h" />
+    <ClInclude Include="Components\Other\TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

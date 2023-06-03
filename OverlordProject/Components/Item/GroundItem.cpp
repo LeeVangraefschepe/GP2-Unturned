@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GroundItem.h"
 
-#include "Materials/DiffuseMaterial.h"
+#include "Materials/Shadow/DiffuseMaterial_Shadow.h"
 
 Item GroundItem::ParseString(const std::wstring& item)
 {
@@ -35,7 +35,7 @@ m_position(position)
 void GroundItem::Initialize(const SceneContext&)
 {
 	std::wstringstream ss{};
-	const auto material = MaterialManager::Get()->CreateMaterial<DiffuseMaterial>();
+	const auto material = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	ss << L"Textures/Items/" << m_name << L".dds";
 	material->SetDiffuseTexture(ss.str());
 	ss.str(L"");
