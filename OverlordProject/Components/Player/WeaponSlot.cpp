@@ -44,7 +44,7 @@ void WeaponSlot::Update(const SceneContext&)
 		m_subject->Notify(Swap, this);
 	}
 
-	if (InputManager::IsMouseButton(InputState::pressed, 1))
+	if (InputManager::IsMouseButton(InputState::pressed, 1) || InputManager::IsKeyboardKey(InputState::pressed, 'Y'))
 	{
 		Fire();
 	}

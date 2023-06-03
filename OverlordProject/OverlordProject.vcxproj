@@ -98,6 +98,7 @@
     <ClCompile Include="Components\Other\Health.cpp" />
     <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Components\Player\Inventory.cpp" />
+    <ClCompile Include="Prefabs\Particles\HitParticle.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Components\Other\Health.h" />
     <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Components\Player\Inventory.h" />
+    <ClInclude Include="Prefabs\Particles\HitParticle.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />
     <ClInclude Include="Materials\Post\PostBloodscale.h" />

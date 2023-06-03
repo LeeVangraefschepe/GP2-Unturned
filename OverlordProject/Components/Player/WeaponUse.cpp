@@ -6,8 +6,6 @@ bool WeaponUse::OnHit(Health*& pHealth, XMFLOAT3& position)
 	const auto rayOrigin = PhysxHelper::ToPxVec3(GetTransform()->GetWorldPosition());
 	const auto rayDirection = PhysxHelper::ToPxVec3(GetTransform()->GetForward());
 
-	std::cout << "Try\n";
-
 	//Filter for ignore groups
 	PxQueryFilterData filterData{};
 	filterData.data.word0 = ~static_cast<UINT>(CollisionGroup::Group9);
@@ -65,11 +63,12 @@ void WeaponUse::OnNotify(unsigned event, WeaponSlot*)
 			if (OnHit(otherHealth, position))
 			{
 				std::cout << "Hit: "<< position.x << ", " << position.y << ", " << position.z << "\n";
+				m_pHitParticle->SetParticle(position);
 				if (otherHealth)
 				{
 					if (otherHealth->Damage(1.f))
 					{
-
+						std::cout << "Zombie died\n";
 					}
 					std::cout << "Hit with health\n";
 				}
@@ -81,4 +80,11 @@ void WeaponUse::OnNotify(unsigned event, WeaponSlot*)
 	default:
 		break;
 	}
+}
+
+void WeaponUse::Initialize(const SceneContext&)
+{
+	m_pHitParticle = new HitParticle{};
+	m_pHitParticle->SetActive(false);
+	GetScene()->AddChild(m_pHitParticle);
 }

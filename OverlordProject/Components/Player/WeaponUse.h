@@ -1,10 +1,13 @@
 #pragma once
 #include "WeaponSlot.h"
 #include "Components/Other/Health.h"
+#include "Prefabs/Particles/HitParticle.h"
 
 class WeaponUse : public BaseComponent, Observer<WeaponSlot>
 {
 	WeaponSlot* m_pWeaponSlot;
+	HitParticle* m_pHitParticle{};
+
 	bool OnHit(Health*& pHealth, XMFLOAT3& position);
 public:
 	WeaponUse(WeaponSlot* weaponSlot);
@@ -18,6 +21,6 @@ public:
 	void OnDestroy() override;
 	void OnNotify(unsigned, WeaponSlot*) override;
 
-	void Initialize(const SceneContext&) override{}
+	void Initialize(const SceneContext&) override;
 };
 
