@@ -5,17 +5,24 @@
 
 Item GroundItem::ParseString(const std::wstring& item)
 {
-	static std::map<std::wstring, Item> enumMap =
-	{
-		{L"Pistol", pistol}
-	};
-
-	if (const auto it = enumMap.find(item); it != enumMap.end())
+	if (const auto it = m_enumMap.find(item); it != m_enumMap.end())
 	{
 		return it->second;
 	}
 
-	throw std::runtime_error("Invalid enum value");
+	throw std::runtime_error("Invalid value");
+}
+
+void GroundItem::ParseItem(Item item, std::wstring& name)
+{
+	for (const auto& pair : m_enumMap)
+	{
+		if (pair.second == item)
+		{
+			name = pair.first;
+			return;
+		}
+	}
 }
 
 GroundItem::GroundItem(const std::wstring& item, XMFLOAT3 position):

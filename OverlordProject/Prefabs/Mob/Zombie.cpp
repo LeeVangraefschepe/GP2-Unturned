@@ -51,6 +51,16 @@ void Zombie::UpdateAttack(float distance, const XMFLOAT3&)
 	m_playerHealth->Damage(m_damage);
 }
 
+void Zombie::OnNotify(unsigned event, Health*)
+{
+	if (static_cast<Health::Events>(event) == Health::died)
+	{
+		GetTransform()->Translate(XMFLOAT3{ 0,-100,0 });
+		m_pControllerComponent->Translate(XMFLOAT3{ 0,-100,0 });
+		SetActive(false);
+	}
+}
+
 Zombie::Zombie(const XMFLOAT3& position, GameObject* target)
 {
 	GetTransform()->Translate(position);
@@ -81,7 +91,10 @@ void Zombie::Initialize(const SceneContext&)
 	controller.height = 2.f;
 	controller.material = pMaterial;
 	m_pControllerComponent = new ControllerComponent{ controller };
+	m_pControllerComponent->SetCollisionGroup(CollisionGroup::Group5);
 	AddComponent(m_pControllerComponent);
+
+	AddComponent(new Health{ 1.f })->GetSubject()->AddObserver(this);
 }
 
 void Zombie::Update(const SceneContext& sceneContext)

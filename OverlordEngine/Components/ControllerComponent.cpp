@@ -18,6 +18,7 @@ void ControllerComponent::Initialize(const SceneContext& /*sceneContext*/)
 		const auto& pControllerManager{ GetGameObject()->GetScene()->GetPhysxProxy()->GetControllerManager() };
 		m_pController = pControllerManager->createController(m_ControllerDesc);
 		ASSERT_NULL_(m_pController);
+		m_pController->setUserData(this);
 		m_pController->getActor()->userData = this;
 
 		// Set the collision and collisionignore groups

@@ -136,6 +136,8 @@
     </ClCompile>
     <ClCompile Include="Materials\UberMaterial.cpp" />
     <ClCompile Include="Prefabs\Mob\Zombie.cpp" />
+    <ClCompile Include="Components\Player\WeaponSlot.cpp" />
+    <ClCompile Include="Components\Player\WeaponUse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OverlordEngine\OverlordEngine.vcxproj">
@@ -177,6 +179,8 @@
     <ClInclude Include="Prefabs\Mob\Zombie.h" />
     <ClInclude Include="System\Observer.h" />
     <ClInclude Include="System\Subject.h" />
+    <ClInclude Include="Components\Player\WeaponSlot.h" />
+    <ClInclude Include="Components\Player\WeaponUse.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

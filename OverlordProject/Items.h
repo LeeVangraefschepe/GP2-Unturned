@@ -1,5 +1,6 @@
 #pragma once
 enum Item
 {
-	pistol
+	pistol,
+	all
 };

@@ -10,7 +10,8 @@ enum class PxTriggerAction
 class GameObject
 {
 public:
-	typedef std::function<void (GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action)> PhysicsCallback;
+	typedef std::function<void(GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action)> PhysicsTriggerCallback;
+	typedef std::function<void(GameObject* pTriggerObject, GameObject* pOtherObject)> PhysicsCollisionEnterCallback;
 
 	GameObject();
 	virtual ~GameObject();
@@ -37,6 +38,7 @@ public:
 	}
 	void RemoveComponent(BaseComponent* pComponent, bool deleteObject = false);
 	void OnTrigger(GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action) const;
+	void OnCollisionEnter(GameObject* pObject, GameObject* pOtherObject) const;
 
 	const std::wstring& GetTag() const { return m_Tag; }
 	void SetTag(const std::wstring& tag) { m_Tag = tag; }
@@ -46,8 +48,11 @@ public:
 	GameScene* GetScene() const;
 	GameObject* GetParent() const { return m_pParentObject; }
 
-	void SetOnTriggerCallBack(PhysicsCallback callback);
+	void SetOnTriggerCallBack(PhysicsTriggerCallback callback);
+	void SetOnCollisionEnterCallBack(PhysicsCollisionEnterCallback callback);
 
+	void SetActive(bool active) { m_IsActive = active; }
+	bool GetActive() const { return m_IsActive; }
 #pragma region
 	template <class T>
 	bool HasComponent(bool searchChildren = false)
@@ -163,6 +168,7 @@ private:
 	GameScene* m_pParentScene{};
 	GameObject* m_pParentObject{};
 	TransformComponent* m_pTransform{};
-	PhysicsCallback m_OnTriggerCallback{};
+	PhysicsTriggerCallback m_OnTriggerCallback{};
+	PhysicsCollisionEnterCallback m_OnCollisionEnterCallback{};
 	std::wstring m_Tag{};
 };

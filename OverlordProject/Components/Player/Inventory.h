@@ -15,6 +15,9 @@ public:
 	void Initialize(const SceneContext& sceneContext) override;
 	void AddItem(Item item);
 	bool ConsumeItem(Item item);
+	int GetAmountItem(Item item);
+	int GetItemSize() const;
+	Item GetItemBySlot(int slot) const;
 private:
 	std::map<Item, int> m_items{};
 };

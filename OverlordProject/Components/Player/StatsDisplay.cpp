@@ -30,6 +30,10 @@ StatsDisplay::~StatsDisplay()
 	{
 		m_health->GetSubject()->RemoveObserver(this);
 	}
+	if (m_energy)
+	{
+		m_energy->GetSubject()->RemoveObserver(this);
+	}
 }
 
 void StatsDisplay::Initialize(const SceneContext& sceneContext)
@@ -76,4 +80,5 @@ void StatsDisplay::OnNotify(unsigned type, Energy*)
 void StatsDisplay::OnDestroy()
 {
 	m_health = nullptr;
+	m_energy = nullptr;
 }

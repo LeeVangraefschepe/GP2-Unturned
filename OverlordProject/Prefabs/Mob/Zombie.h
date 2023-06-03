@@ -1,7 +1,7 @@
 #pragma once
 #include "Components/Other/Health.h"
 
-class Zombie final : public GameObject
+class Zombie final : public GameObject, Observer<Health>
 {
 	ModelAnimator* m_pAnimator{ nullptr };
 	GameObject* m_pVisuals{ nullptr };
@@ -20,6 +20,10 @@ class Zombie final : public GameObject
 	void UpdateAnimation();
 	void UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPosition, float deltaTime);
 	void UpdateAttack(float distance, const XMFLOAT3& playerPosition);
+
+	bool m_active{ true };
+
+	void OnNotify(unsigned, Health*) override;
 
 public:
 	Zombie(const XMFLOAT3& position, GameObject* target);

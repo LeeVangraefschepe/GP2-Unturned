@@ -11,6 +11,7 @@ void Character::Initialize(const SceneContext& /*sceneContext*/)
 {
 	//Controller
 	m_pControllerComponent = AddComponent(new ControllerComponent(m_CharacterDesc.controller));
+	m_pControllerComponent->SetCollisionGroup(CollisionGroup::Group9);
 
 	//Camera
 	const auto pCamera = AddChild(new FixedCamera());

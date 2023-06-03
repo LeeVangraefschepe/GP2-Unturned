@@ -32,6 +32,8 @@
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Components\Player\Inventory.cpp" />
+    <ClCompile Include="Components\Player\WeaponSlot.cpp" />
+    <ClCompile Include="Components\Player\WeaponUse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -68,6 +70,8 @@
     <ClInclude Include="Materials\Post\PostBloodscale.h" />
     <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Components\Player\Inventory.h" />
+    <ClInclude Include="Components\Player\WeaponSlot.h" />
+    <ClInclude Include="Components\Player\WeaponUse.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

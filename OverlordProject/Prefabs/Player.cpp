@@ -5,6 +5,8 @@
 #include "Components/Player/Inventory.h"
 #include "Components/Player/ItemPicker.h"
 #include "Components/Player/StatsDisplay.h"
+#include "Components/Player/WeaponSlot.h"
+#include "Components/Player/WeaponUse.h"
 
 Player::Player(const XMFLOAT3& position)
 {
@@ -30,8 +32,10 @@ void Player::Initialize(const SceneContext& sceneContext)
 	m_pCharacter->GetTransform()->Translate(0.f, 10.f, 0.f);
 
 	const auto inventory = m_pCharacter->AddComponent(new Inventory{});
-
 	m_pCharacter->AddComponent(new ItemPicker{ inventory });
+
+	const auto weaponSlot = m_pCharacter->AddComponent(new WeaponSlot{ inventory });
+	m_pCharacter->AddComponent(new WeaponUse{ weaponSlot });
 
 	const auto health = m_pCharacter->AddComponent(new Health{ 100.f });
 	const auto energy = m_pCharacter->AddComponent(new Energy{ 5.f,2.f });
