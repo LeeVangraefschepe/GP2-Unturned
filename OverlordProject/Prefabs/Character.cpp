@@ -16,6 +16,7 @@ void Character::Initialize(const SceneContext& /*sceneContext*/)
 	//Camera
 	const auto pCamera = AddChild(new FixedCamera());
 	m_pCameraComponent = pCamera->GetComponent<CameraComponent>();
+	m_pCameraTransform = pCamera->GetTransform();
 	m_pCameraComponent->SetActive(true); //Uncomment to make this camera the active camera
 
 	GetScene()->SetActiveCamera(m_pCameraComponent);
@@ -30,6 +31,12 @@ void Character::Update(const SceneContext& sceneContext)
 	{
 		//constexpr float epsilon{ 0.01f }; //Constant that can be used to compare if a float is near zero
 		const float elapsedSec{ sceneContext.pGameTime->GetElapsed() };
+
+		if (m_shake)
+		{
+			m_TotalPitch += MathHelper::randF(-1.f, 1.f);
+			m_TotalYaw += MathHelper::randF(-1.f, 1.f);
+		}
 
 		//***************
 		//HANDLE INPUT

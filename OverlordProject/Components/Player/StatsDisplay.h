@@ -1,5 +1,6 @@
 #pragma once
 #include "Energy.h"
+#include "Food.h"
 #include "Components/Other/Health.h"
 #include "Materials/Post/PostBloodscale.h"
 
@@ -9,6 +10,7 @@ class StatsDisplay : public BaseComponent, Observer<Health>, Observer<Energy>
 
 	Health* m_health;
 	Energy* m_energy;
+	Food* m_food;
 
 	GameObject* m_pBackground{};
 
@@ -27,7 +29,7 @@ class StatsDisplay : public BaseComponent, Observer<Health>, Observer<Energy>
 	void CreateBar(const SceneContext& sceneContext, GameObject*& pDisplay, float height, const XMFLOAT4& color) const;
 
 public:
-	StatsDisplay(Health* health, Energy* energy);
+	StatsDisplay(Health* health, Energy* energy, Food* food);
 	~StatsDisplay() override;
 
 	StatsDisplay(const StatsDisplay& other) = delete;
@@ -36,6 +38,7 @@ public:
 	StatsDisplay& operator=(StatsDisplay&& other) noexcept = delete;
 
 	void Initialize(const SceneContext& sceneContext) override;
+	void Update(const SceneContext&) override;
 
 	void OnNotify(unsigned, Health*) override;
 	void OnNotify(unsigned, Energy*) override;

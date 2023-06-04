@@ -98,6 +98,7 @@
     <ClCompile Include="Components\Other\Health.cpp" />
     <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Components\Player\Inventory.cpp" />
+    <ClCompile Include="Components\Player\Food.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Prefabs\Particles\HitParticle.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Components\Other\Health.h" />
     <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Components\Player\Inventory.h" />
+    <ClInclude Include="Components\Player\Food.h" />
     <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Prefabs\Particles\HitParticle.h" />

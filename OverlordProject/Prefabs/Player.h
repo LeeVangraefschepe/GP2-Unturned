@@ -1,6 +1,8 @@
 #pragma once
 #include "Character.h"
-class Player final : public GameObject
+#include "Components/Other/Health.h"
+
+class Player final : public GameObject, Observer<Health>
 {
 	enum InputIds
 	{
@@ -13,11 +15,18 @@ class Player final : public GameObject
 	};
 
 	Character* m_pCharacter{};
+
+	Health* m_pHealth{};
+	void OnNotify(unsigned, Health*) override;
+
+	const float m_shakeDuration{0.5f};
+	float m_currentShakeDuration{};
 public:
 	Player(const XMFLOAT3& position);
 	~Player() override = default;
 
 	void Initialize(const SceneContext&) override;
+	void Update(const SceneContext&) override;
 
 	Character* GetPlayerCharacter() const { return m_pCharacter; }
 

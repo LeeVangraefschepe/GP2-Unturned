@@ -79,6 +79,18 @@ void SceneManager::PreviousScene()
 	}
 }
 
+GameScene* SceneManager::GetScene(const std::wstring& name) const
+{
+	for (const auto& scene : m_pScenes)
+	{
+		if (scene->m_SceneName == name)
+		{
+			return scene;
+		}
+	}
+	return nullptr;
+}
+
 void SceneManager::SetActiveGameScene(const std::wstring& sceneName)
 {
 	const auto it = std::ranges::find_if(m_pScenes, [sceneName](const GameScene* pScene)
@@ -90,6 +102,11 @@ void SceneManager::SetActiveGameScene(const std::wstring& sceneName)
 	{
 		m_NewActiveScene = *it;
 	}
+}
+
+void SceneManager::SetActiveGameScene(GameScene* pScene)
+{
+	m_ActiveScene = pScene;
 }
 
 void SceneManager::WindowStateChanged(int state, bool active) const

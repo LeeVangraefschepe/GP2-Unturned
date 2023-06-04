@@ -30,5 +30,5 @@ void TimeManager::Update(const SceneContext& sceneContext)
 
 	sceneContext.pLights->GetDirectionalLight().intensity = GetDaylightIntensity();
 	sceneContext.pLights->GetDirectionalLight().direction.x = m_currentDayTime / m_totalDayTime * XM_PI;
-	std::cout << "Daycount: " << m_dayCount << "\n";
+	//std::cout << "Daycount: " << m_dayCount << "\n";
 }

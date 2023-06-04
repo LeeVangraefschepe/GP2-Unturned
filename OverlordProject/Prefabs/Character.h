@@ -46,6 +46,7 @@ public:
 	Character& operator=(Character&& other) noexcept = delete;
 
 	void SetEnergy(Energy* energy) { m_pEnergy = energy; }
+	void SetShake(bool value) { m_shake = value; }
 	void DrawImGui();
 
 protected:
@@ -55,6 +56,7 @@ protected:
 private:
 	Energy* m_pEnergy{};
 	CameraComponent* m_pCameraComponent{};
+	TransformComponent* m_pCameraTransform{};
 	ControllerComponent* m_pControllerComponent{};
 
 	CharacterDesc m_CharacterDesc;
@@ -65,5 +67,6 @@ private:
 
 	XMFLOAT3 m_TotalVelocity{};						//TotalVelocity with X/Z for Horizontal Movement AND Y for Vertical Movement (fall/jump)
 	XMFLOAT3 m_CurrentDirection{};					//Current/Last Direction based on Camera forward/right (Stored for deacceleration)
+	bool m_shake{true};
 };
 

@@ -10,9 +10,11 @@ public:
 	void AddGameScene(GameScene* pScene);
 	void RemoveGameScene(GameScene* pScene, bool deleteObject = false);
 	void SetActiveGameScene(const std::wstring& sceneName);
+	void SetActiveGameScene(GameScene* pScene);
 	void NextScene();
 	void PreviousScene();
 	GameScene* GetActiveScene() const { return m_ActiveScene; }
+	GameScene* GetScene(const std::wstring& name) const;
 	const SceneContext& GetActiveSceneContext() const { return m_ActiveScene->GetSceneContext(); }
 	SceneSettings& GetActiveSceneSettings() const { return m_ActiveScene->GetSceneSettings(); }
 

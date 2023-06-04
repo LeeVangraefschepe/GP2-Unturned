@@ -16,9 +16,10 @@ void StatsDisplay::CreateBar(const SceneContext& sceneContext, GameObject*& pDis
 	pDisplayBackground->GetTransform()->Translate(75.f, sceneContext.windowHeight - height, .1f);
 }
 
-StatsDisplay::StatsDisplay(Health* health, Energy* energy):
+StatsDisplay::StatsDisplay(Health* health, Energy* energy, Food* food):
 	m_health(health),
-	m_energy(energy)
+	m_energy(energy),
+	m_food(food)
 {
 	m_health->GetSubject()->AddObserver(this);
 	m_energy->GetSubject()->AddObserver(this);
@@ -43,15 +44,19 @@ void StatsDisplay::Initialize(const SceneContext& sceneContext)
 	m_pPostBloodscale = MaterialManager::Get()->CreateMaterial<PostBloodscale>();
 	scene->AddPostProcessingEffect(m_pPostBloodscale);
 
-	CreateBar(sceneContext, m_pHealthDisplay, 230, m_healthColor);
-	CreateBar(sceneContext, m_pStaminaDisplay, 170, m_staminaColor);
-	CreateBar(sceneContext, m_pWaterDisplay, 110, m_waterColor);
-	CreateBar(sceneContext, m_pFoodDisplay, 50, m_foodColor);
+	CreateBar(sceneContext, m_pHealthDisplay, 160, m_healthColor);
+	CreateBar(sceneContext, m_pStaminaDisplay, 100, m_staminaColor);
+	CreateBar(sceneContext, m_pFoodDisplay, 40, m_foodColor);
 
 	m_pBackground = new GameObject();
 	m_pBackground->AddComponent(new SpriteComponent(L"Textures/UI/StatsBars.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
 	scene->AddChild(m_pBackground);
-	m_pBackground->GetTransform()->Translate(0.f, sceneContext.windowHeight - 250, .1f);
+	m_pBackground->GetTransform()->Translate(0.f, sceneContext.windowHeight - 180, .1f);
+}
+
+void StatsDisplay::Update(const SceneContext&)
+{
+	m_pFoodDisplay->GetTransform()->Scale(m_food->GetSaturation()/m_food->GetMaxSaturation(), 1.f, 1.f);
 }
 
 void StatsDisplay::OnNotify(unsigned, Health*)

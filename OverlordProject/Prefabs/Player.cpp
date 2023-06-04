@@ -2,11 +2,18 @@
 #include "Player.h"
 
 #include "Components/Other/Health.h"
+#include "Components/Player/Food.h"
 #include "Components/Player/Inventory.h"
 #include "Components/Player/ItemPicker.h"
 #include "Components/Player/StatsDisplay.h"
 #include "Components/Player/WeaponSlot.h"
 #include "Components/Player/WeaponUse.h"
+
+void Player::OnNotify(unsigned, Health*)
+{
+	m_pCharacter->SetShake(true);
+	m_currentShakeDuration = m_shakeDuration;
+}
 
 Player::Player(const XMFLOAT3& position)
 {
@@ -37,12 +44,14 @@ void Player::Initialize(const SceneContext& sceneContext)
 	const auto weaponSlot = m_pCharacter->AddComponent(new WeaponSlot{ inventory });
 	m_pCharacter->AddComponent(new WeaponUse{ weaponSlot });
 
-	const auto health = m_pCharacter->AddComponent(new Health{ 100.f });
+	m_pHealth = m_pCharacter->AddComponent(new Health{ 100.f });
 	const auto energy = m_pCharacter->AddComponent(new Energy{ 5.f,2.f });
-	
-	m_pCharacter->AddComponent(new StatsDisplay{ health, energy });
-	m_pCharacter->SetEnergy(energy);
+	m_pHealth->GetSubject()->AddObserver(this);
 
+	const auto food = m_pCharacter->AddComponent(new Food{ m_pHealth, 100.f, 0.8f });
+	
+	m_pCharacter->AddComponent(new StatsDisplay{ m_pHealth, energy, food });
+	m_pCharacter->SetEnergy(energy);
 
 	auto inputAction = InputAction(CharacterMoveLeft, InputState::down, 'Q');
 	sceneContext.pInput->AddInputAction(inputAction);
@@ -56,4 +65,13 @@ void Player::Initialize(const SceneContext& sceneContext)
 	sceneContext.pInput->AddInputAction(inputAction);
 	inputAction = InputAction(CharacterSprint, InputState::down, VK_SHIFT, -1, XINPUT_GAMEPAD_A);
 	sceneContext.pInput->AddInputAction(inputAction);
+}
+
+void Player::Update(const SceneContext& sceneContext)
+{
+	m_currentShakeDuration -= sceneContext.pGameTime->GetElapsed();
+	if (m_currentShakeDuration < 0.f)
+	{
+		m_pCharacter->SetShake(false);
+	}
 }

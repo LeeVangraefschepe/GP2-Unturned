@@ -36,6 +36,7 @@
     <ClCompile Include="Components\Other\TimeManager.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
+    <ClCompile Include="Components\Player\Food.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -76,6 +77,7 @@
     <ClInclude Include="Components\Other\TimeManager.h" />
     <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
+    <ClInclude Include="Components\Player\Food.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />
