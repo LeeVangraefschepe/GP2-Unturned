@@ -13,7 +13,7 @@ public:
 	Inventory& operator=(Inventory&& other) noexcept = delete;
 
 	void Initialize(const SceneContext& sceneContext) override;
-	void AddItem(Item item);
+	void AddItem(Item item, int amount);
 	bool ConsumeItem(Item item);
 	int GetAmountItem(Item item);
 	int GetItemSize() const;

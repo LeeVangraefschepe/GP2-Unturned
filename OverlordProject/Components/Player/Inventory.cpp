@@ -9,15 +9,14 @@ void Inventory::Initialize(const SceneContext&)
 {
 }
 
-void Inventory::AddItem(Item item)
+void Inventory::AddItem(Item item, int amount)
 {
 	if (!m_items.contains(item))
 	{
-		m_items.emplace(item, 8);
+		m_items.emplace(item, amount);
 		return;
 	}
-	++m_items[item];
-	m_items[item] += 7;
+	m_items[item] += amount;
 }
 
 bool Inventory::ConsumeItem(Item item)
@@ -42,6 +41,10 @@ bool Inventory::ConsumeItem(Item item)
 
 int Inventory::GetAmountItem(Item item)
 {
+	if (!m_items.contains(item))
+	{
+		return -1;
+	}
 	return m_items[item];
 }
 

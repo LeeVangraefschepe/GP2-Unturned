@@ -13,6 +13,7 @@ public:
 	static inline std::map<std::wstring, Item> m_enumMap =
 	{
 		{L"Pistol", pistol},
+		{L"Food", food},
 		{L"All", all},
 	};
 	static Item ParseString(const std::wstring& item);

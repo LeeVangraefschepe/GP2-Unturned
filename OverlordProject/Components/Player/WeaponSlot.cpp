@@ -21,6 +21,7 @@ void WeaponSlot::Initialize(const SceneContext&)
 void WeaponSlot::Update(const SceneContext&)
 {
 	const int maxSlot = m_inventory->GetItemSize();
+	std::cout << maxSlot << "\n";
 	if (InputManager::IsKeyboardKey(InputState::pressed, VK_UP))
 	{
 		++m_currentSlot;
@@ -59,7 +60,7 @@ void WeaponSlot::Draw(const SceneContext&)
 	GroundItem::ParseItem(currentItem, itemName);
 
 	std::wstringstream ss{};
-	ss << itemName << L": " << m_inventory->GetAmountItem(static_cast<Item>(m_currentSlot));
+	ss << itemName << L": " << m_inventory->GetAmountItem(currentItem);
 
 	TextRenderer::Get()->DrawText(m_pFont, ss.str(), { 100,100 }, XMFLOAT4{ Colors::White });
 }

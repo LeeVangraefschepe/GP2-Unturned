@@ -2,5 +2,6 @@
 enum Item
 {
 	pistol,
+	food,
 	all
 };

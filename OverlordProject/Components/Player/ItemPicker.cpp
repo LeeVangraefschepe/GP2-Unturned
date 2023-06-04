@@ -36,7 +36,15 @@ void ItemPicker::Update(const SceneContext& sceneContext)
 		{
 			if (const auto groundItem = gameobject->GetComponent<GroundItem>())
 			{
-				m_inventory->AddItem(groundItem->GetItem());
+				const auto item = groundItem->GetItem();
+				if (item == pistol)
+				{
+					m_inventory->AddItem(item, 5);
+				}
+				else
+				{
+					m_inventory->AddItem(item, 1);
+				}
 				std::cout << "Picked up item: " << groundItem->GetItem() << "\n";
 			}
 			

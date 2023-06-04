@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WeaponUse.h"
 
+#include "Food.h"
+
 bool WeaponUse::OnHit(Health*& pHealth, XMFLOAT3& position)
 {
 	const auto rayOrigin = PhysxHelper::ToPxVec3(GetTransform()->GetWorldPosition());
@@ -75,7 +77,9 @@ void WeaponUse::OnNotify(unsigned event, WeaponSlot*)
 			}
 		}
 		break;
-
+	case food:
+		GetGameObject()->GetComponent<Food>()->Eat(20.f);
+		break;
 	case all:
 	default:
 		break;
