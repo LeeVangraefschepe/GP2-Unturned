@@ -124,6 +124,7 @@
     <ClCompile Include="Materials\SpikyMaterial.cpp" />
     <ClCompile Include="Components\Player\StatsDisplay.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="Materials\SkyBoxMaterial.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
@@ -184,6 +185,7 @@
     <ClInclude Include="Materials\SpikyMaterial.h" />
     <ClInclude Include="Components\Player\StatsDisplay.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="Materials\SkyBoxMaterial.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Materials\UberMaterial.h" />

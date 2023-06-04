@@ -2,6 +2,7 @@
 #include "MapScene.h"
 
 #include "Components/Other/TimeManager.h"
+#include "Materials/SkyBoxMaterial.h"
 #include "Prefabs/Character.h"
 #include "Prefabs/Player.h"
 #include "Prefabs/Map/MapPrefab.h"
@@ -38,6 +39,12 @@ void MapScene::Initialize()
 	backgroundImage->GetTransform()->Translate(m_SceneContext.windowWidth/2.f, m_SceneContext.windowHeight / 2.f, 0.1f);
 	AddChild(backgroundImage);
 
+	GameObject* pSkybox{ AddChild(new GameObject{}) };
+	SkyBoxMaterial* pSkyboxMaterial{ MaterialManager::Get()->CreateMaterial<SkyBoxMaterial>() };
+	pSkyboxMaterial->SetTexture(L"Textures/SkyBox.dds");
+	pSkybox->AddComponent(new ModelComponent{ L"Meshes/Box.ovm", false })->SetMaterial(pSkyboxMaterial);
+	pSkybox->GetTransform()->Scale(100.0f);
+
 	const auto pFmod{ SoundManager::Get()->GetSystem() };
 	FMOD_RESULT result = pFmod->createStream("Resources/Audio/BackgroundMusic.mp3", FMOD_2D | FMOD_LOOP_NORMAL, nullptr, &m_music);
 	SoundManager::Get()->ErrorCheck(result);
@@ -50,7 +57,7 @@ void MapScene::Initialize()
 
 void MapScene::Update()
 {
-	InputManager::SetForceMouseToCenter(true);
+	InputManager::SetForceMouseToCenter(false);
 	if (InputManager::IsKeyboardKey(InputState::pressed, 'R'))
 	{
 		RemoveChild(m_pMap, true);

@@ -40,6 +40,7 @@
     <ClCompile Include="Scenes\PauseMenuScene.cpp" />
     <ClCompile Include="Scenes\EndGameScene.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="Materials\SkyBoxMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="Scenes\PauseMenuScene.h" />
     <ClInclude Include="Scenes\EndGameScene.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="Materials\SkyBoxMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OverlordProject.rc" />

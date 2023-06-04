@@ -89,7 +89,7 @@ void Zombie::PlayHitSound()
 	SoundManager::Get()->ErrorCheck(result);
 
 	//Range sound
-	m_channel->set3DMinMaxDistance(0.f, 15.f);
+	m_channel->set3DMinMaxDistance(0.f, 50.f);
 
 	//Apply settings
 	const auto spherePos = FmodHelper::ToFmod(m_pControllerComponent->GetTransform()->GetWorldPosition());
