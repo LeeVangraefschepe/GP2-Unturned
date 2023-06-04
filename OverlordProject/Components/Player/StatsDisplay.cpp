@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "StatsDisplay.h"
 
+#include "ScoreManager.h"
+
 void StatsDisplay::CreateBar(const SceneContext& sceneContext, GameObject*& pDisplay, float height, const XMFLOAT4& color) const
 {
 	const auto scene = GetScene();
@@ -39,6 +41,8 @@ StatsDisplay::~StatsDisplay()
 
 void StatsDisplay::Initialize(const SceneContext& sceneContext)
 {
+	m_pFont = ContentManager::Load<SpriteFont>(L"SpriteFonts/Minecraft_32.fnt");
+
 	const auto scene = GetScene();
 
 	m_pPostBloodscale = MaterialManager::Get()->CreateMaterial<PostBloodscale>();
@@ -57,6 +61,13 @@ void StatsDisplay::Initialize(const SceneContext& sceneContext)
 void StatsDisplay::Update(const SceneContext&)
 {
 	m_pFoodDisplay->GetTransform()->Scale(m_food->GetSaturation()/m_food->GetMaxSaturation(), 1.f, 1.f);
+}
+
+void StatsDisplay::Draw(const SceneContext& sceneContext)
+{
+	std::wstringstream ss{};
+	ss << L"Score: " << ScoreManager::Get()->GetScore();
+	TextRenderer::Get()->DrawText(m_pFont, ss.str(), { 0,sceneContext.windowHeight - 210 }, XMFLOAT4{ Colors::White });
 }
 
 void StatsDisplay::OnNotify(unsigned, Health*)

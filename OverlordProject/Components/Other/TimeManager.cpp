@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TimeManager.h"
 
+#include "ScoreManager.h"
+
 float TimeManager::GetDaylightIntensity() const
 {
 	// Calculate the normalized time of the day (-1 to 1)
@@ -25,10 +27,10 @@ void TimeManager::Update(const SceneContext& sceneContext)
 	if (m_currentDayTime >= m_totalDayTime)
 	{
 		m_dayCount++;
+		ScoreManager::Get()->AddScore(10);
 		m_currentDayTime = 0.f;
 	}
 
 	sceneContext.pLights->GetDirectionalLight().intensity = GetDaylightIntensity();
 	sceneContext.pLights->GetDirectionalLight().direction.x = m_currentDayTime / m_totalDayTime * XM_PI;
-	//std::cout << "Daycount: " << m_dayCount << "\n";
 }

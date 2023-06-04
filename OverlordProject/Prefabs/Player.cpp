@@ -11,6 +11,11 @@
 
 void Player::OnNotify(unsigned event, Health*)
 {
+	if (event == Health::Events::died)
+	{
+		SceneManager::Get()->SetActiveGameScene(SceneManager::Get()->GetScene(L"EndGameScene"));
+		return;
+	}
 	if (event != Health::Events::damage) { return; }
 	m_pCharacter->SetShake(true);
 	m_currentShakeDuration = m_shakeDuration;

@@ -79,6 +79,16 @@ void Character::Update(const SceneContext& sceneContext)
 		const float rotationAmount{ sceneContext.pGameTime->GetElapsed() * m_CharacterDesc.rotationSpeed };
 		m_TotalYaw += look.x * rotationAmount;
 		m_TotalPitch += look.y * rotationAmount;
+
+		if (m_TotalPitch >= 60.f)
+		{
+			m_TotalPitch = 60.f;
+		}
+		if (m_TotalPitch <= -50.f)
+		{
+			m_TotalPitch = -50.f;
+		}
+
 		//Rotate this character based on the TotalPitch (X) and TotalYaw (Y)
 		GetTransform()->Rotate(0.0f, m_TotalYaw, 0.0f);
 		sceneContext.pCamera->GetTransform()->Rotate(m_TotalPitch, 0.0f, 0.0f);

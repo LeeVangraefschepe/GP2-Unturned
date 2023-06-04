@@ -26,6 +26,8 @@ class StatsDisplay : public BaseComponent, Observer<Health>, Observer<Energy>
 	GameObject* m_pFoodDisplay{};
 	XMFLOAT4 m_foodColor{ 0.5f,0.4f,0.f,1.f };
 
+	SpriteFont* m_pFont{};
+
 	void CreateBar(const SceneContext& sceneContext, GameObject*& pDisplay, float height, const XMFLOAT4& color) const;
 
 public:
@@ -39,6 +41,7 @@ public:
 
 	void Initialize(const SceneContext& sceneContext) override;
 	void Update(const SceneContext&) override;
+	void Draw(const SceneContext&) override;
 
 	void OnNotify(unsigned, Health*) override;
 	void OnNotify(unsigned, Energy*) override;

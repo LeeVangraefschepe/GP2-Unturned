@@ -2,11 +2,12 @@
 #include "WeaponUse.h"
 
 #include "Food.h"
+#include "ScoreManager.h"
 
 bool WeaponUse::OnHit(Health*& pHealth, XMFLOAT3& position)
 {
 	const auto rayOrigin = PhysxHelper::ToPxVec3(GetTransform()->GetWorldPosition());
-	const auto rayDirection = PhysxHelper::ToPxVec3(GetTransform()->GetForward());
+	const auto rayDirection = PhysxHelper::ToPxVec3(GetScene()->GetActiveCamera()->GetTransform()->GetForward());
 
 	//Filter for ignore groups
 	PxQueryFilterData filterData{};
@@ -57,6 +58,8 @@ void WeaponUse::OnNotify(unsigned event, WeaponSlot*)
 	XMFLOAT3 position{};
 	Health* otherHealth{};
 
+	ScoreManager::Get()->AddScore(10);
+
 	switch (const Item usedItem = m_pWeaponSlot->GetSelectedItem())
 	{
 	case pistol:
@@ -70,6 +73,7 @@ void WeaponUse::OnNotify(unsigned event, WeaponSlot*)
 				{
 					if (otherHealth->Damage(1.f))
 					{
+						ScoreManager::Get()->AddScore(50);
 						std::cout << "Zombie died\n";
 					}
 					std::cout << "Hit with health\n";

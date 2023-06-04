@@ -21,5 +21,7 @@ protected:
 
 private:
 	ButtonPrefab* m_pButtonContinue{};
+	SpriteFont* m_pFont{};
+	bool m_loaded{};
 };
 

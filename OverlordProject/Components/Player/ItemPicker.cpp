@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ItemPicker.h"
 
+#include "ScoreManager.h"
 #include "../Item/GroundItem.h"
 
 ItemPicker::ItemPicker(Inventory* inventory)
@@ -45,6 +46,7 @@ void ItemPicker::Update(const SceneContext& sceneContext)
 				{
 					m_inventory->AddItem(item, 1);
 				}
+				ScoreManager::Get()->AddScore(10);
 				std::cout << "Picked up item: " << groundItem->GetItem() << "\n";
 			}
 			

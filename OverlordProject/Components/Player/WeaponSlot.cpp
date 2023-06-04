@@ -21,7 +21,6 @@ void WeaponSlot::Initialize(const SceneContext&)
 void WeaponSlot::Update(const SceneContext&)
 {
 	const int maxSlot = m_inventory->GetItemSize();
-	std::cout << maxSlot << "\n";
 	if (InputManager::IsKeyboardKey(InputState::pressed, VK_UP))
 	{
 		++m_currentSlot;
@@ -51,18 +50,22 @@ void WeaponSlot::Update(const SceneContext&)
 	}
 }
 
-void WeaponSlot::Draw(const SceneContext&)
+void WeaponSlot::Draw(const SceneContext& sceneContext)
 {
-	if (m_inventory->GetItemSize() == 0) {return;}
-
-	std::wstring itemName{};
-	const Item currentItem = m_inventory->GetItemBySlot(m_currentSlot);
-	GroundItem::ParseItem(currentItem, itemName);
-
 	std::wstringstream ss{};
-	ss << itemName << L": " << m_inventory->GetAmountItem(currentItem);
+	if (m_inventory->GetItemSize() == 0)
+	{
+		ss << L"NONE";
+	}
+	else
+	{
+		std::wstring itemName{};
+		const Item currentItem = m_inventory->GetItemBySlot(m_currentSlot);
+		GroundItem::ParseItem(currentItem, itemName);
+		ss << itemName << L": " << m_inventory->GetAmountItem(currentItem);
+	}
 
-	TextRenderer::Get()->DrawText(m_pFont, ss.str(), { 100,100 }, XMFLOAT4{ Colors::White });
+	TextRenderer::Get()->DrawText(m_pFont, ss.str(), { 0,sceneContext.windowHeight - 250 }, XMFLOAT4{ Colors::White });
 }
 
 void WeaponSlot::Fire()
