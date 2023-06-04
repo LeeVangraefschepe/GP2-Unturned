@@ -6,7 +6,6 @@ Model_0: X:5 Y:0 Z:45 R:90
 Model_0: X:-67 Y:0 Z:45 R:90
 Model_0: X:29 Y:0 Z:45 R:90
 Model_0: X:-19 Y:0 Z:93 R:0
-Model_0: X:-19 Y:0 Z:-3 R:0
 Model_0: X:-91 Y:0 Z:45 R:90
 Model_0: X:-19 Y:0 Z:117 R:0
 Model_0: X:53 Y:0 Z:45 R:90
@@ -15,6 +14,12 @@ Model_1: X:77 Y:0 Z:45 R:270
 Model_1: X:-19 Y:0 Z:-51 R:270
 Model_1: X:-115 Y:0 Z:45 R:270
 Model_1: X:-19 Y:0 Z:141 R:270
+Model_1: X:-19 Y:0 Z:-3 R:270
+Model_0: X:-43 Y:0 Z:-3 R:90
+Model_0: X:5 Y:0 Z:-3 R:90
+Model_0: X:29 Y:0 Z:-3 R:90
+Model_0: X:53 Y:0 Z:-3 R:90
+Model_1: X:77 Y:0 Z:-3 R:270
 Model_1: X:-115 Y:0 Z:-51 R:270
 Model_0: X:-115 Y:0 Z:-27 R:0
 Model_0: X:-115 Y:0 Z:-75 R:0
@@ -61,7 +66,6 @@ Model_0: X:53 Y:0 Z:-51 R:90
 Model_0: X:101 Y:0 Z:-51 R:90
 Model_0: X:29 Y:0 Z:-51 R:90
 Model_0: X:125 Y:0 Z:-51 R:90
-Model_0: X:77 Y:0 Z:-3 R:0
 Model_0: X:77 Y:0 Z:-99 R:0
 Model_0: X:5 Y:0 Z:-51 R:90
 Model_0: X:77 Y:0 Z:21 R:0

@@ -1,4 +1,6 @@
 #pragma once
+class Food;
+
 class Energy : public BaseComponent
 {
 public:
@@ -9,7 +11,7 @@ public:
 		regen,
 	};
 
-	Energy(float maxEnergy, float regenCooldown);
+	Energy(Food* pFood, float maxEnergy, float regenCooldown);
 	~Energy() override = default;
 
 	Energy(const Energy& other) = delete;
@@ -26,6 +28,7 @@ public:
 	float GetMaxEnergy() const { return m_maxEnergy; }
 	float GetEnergy() const { return m_currentEnergy; }
 private:
+	Food* m_pFood;
 	std::unique_ptr<Subject<Energy>> m_subject = std::make_unique<Subject<Energy>>();
 	float m_maxEnergy;
 	float m_currentEnergy;

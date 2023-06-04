@@ -5,6 +5,7 @@ public:
 	enum Events
 	{
 		damage = 0,
+		heal,
 		died
 	};
 
@@ -19,6 +20,7 @@ public:
 	void Initialize(const SceneContext&) override;
 
 	bool Damage(float amount);
+	void Heal(float amount);
 	bool Died() const;
 
 	Subject<Health>* GetSubject() const { return m_subject.get(); }

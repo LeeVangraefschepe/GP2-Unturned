@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "Energy.h"
+#include "Food.h"
 
-Energy::Energy(float maxEnergy, float regenCooldown):
+Energy::Energy(Food* pFood ,float maxEnergy, float regenCooldown) :
 m_maxEnergy(maxEnergy),
-m_maxRegenCooldown(regenCooldown)
+m_maxRegenCooldown(regenCooldown),
+m_pFood(pFood)
 {
 	m_currentEnergy = m_maxEnergy;
 	m_currentRegenCooldown = 0.f;
@@ -25,6 +27,7 @@ void Energy::Update(const SceneContext& sceneContext)
 	if (m_currentEnergy < m_maxEnergy)
 	{
 		m_currentEnergy += deltaTime;
+		m_pFood->Hunger(deltaTime*2.5f);
 		m_subject->Notify(regen, this);
 	}
 }

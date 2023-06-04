@@ -34,6 +34,8 @@ m_position(position)
 
 void GroundItem::Initialize(const SceneContext&)
 {
+	GetTransform()->Rotate(XMFLOAT3{ 90,0,0 });
+
 	std::wstringstream ss{};
 	const auto material = MaterialManager::Get()->CreateMaterial<DiffuseMaterial_Shadow>();
 	ss << L"Textures/Items/" << m_name << L".dds";

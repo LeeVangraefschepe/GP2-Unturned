@@ -9,8 +9,9 @@
 #include "Components/Player/WeaponSlot.h"
 #include "Components/Player/WeaponUse.h"
 
-void Player::OnNotify(unsigned, Health*)
+void Player::OnNotify(unsigned event, Health*)
 {
+	if (event != Health::Events::damage) { return; }
 	m_pCharacter->SetShake(true);
 	m_currentShakeDuration = m_shakeDuration;
 }
@@ -45,10 +46,10 @@ void Player::Initialize(const SceneContext& sceneContext)
 	m_pCharacter->AddComponent(new WeaponUse{ weaponSlot });
 
 	m_pHealth = m_pCharacter->AddComponent(new Health{ 100.f });
-	const auto energy = m_pCharacter->AddComponent(new Energy{ 5.f,2.f });
+	const auto food = m_pCharacter->AddComponent(new Food{ m_pHealth, 100.f, 0.8f });
+	const auto energy = m_pCharacter->AddComponent(new Energy{ food,5.f,2.f });
 	m_pHealth->GetSubject()->AddObserver(this);
 
-	const auto food = m_pCharacter->AddComponent(new Food{ m_pHealth, 100.f, 0.8f });
 	
 	m_pCharacter->AddComponent(new StatsDisplay{ m_pHealth, energy, food });
 	m_pCharacter->SetEnergy(energy);

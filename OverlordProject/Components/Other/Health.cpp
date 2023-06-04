@@ -25,6 +25,16 @@ bool Health::Damage(float amount)
 	return false;
 }
 
+void Health::Heal(float amount)
+{
+	m_currentHealth += amount;
+	if (m_currentHealth > m_maxHealth)
+	{
+		m_currentHealth = m_maxHealth;
+	}
+	m_subject->Notify(heal, this);
+}
+
 bool Health::Died() const
 {
 	return m_currentHealth <= 0.f;

@@ -12,6 +12,7 @@ public:
 	~Food() override = default;
 
 	void Eat(float saturation);
+	void Hunger(float amount);
 
 	void Initialize(const SceneContext& sceneContext) override;
 	void Update(const SceneContext&) override;
