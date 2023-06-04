@@ -14,7 +14,7 @@ void Zombie::UpdateAnimation()
 
 void Zombie::UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPosition, float deltaTime)
 {
-	constexpr float movementSpeed{ 0.1f };
+	constexpr float movementSpeed{ 6.f };
 
 	const XMVECTOR walkingDirection = XMVectorScale(direction, movementSpeed);
 
@@ -23,6 +23,10 @@ void Zombie::UpdateMovement(const XMVECTOR& direction, const XMFLOAT3& playerPos
 	XMStoreFloat3(&velocity, walkingDirection);
 
 	m_totalVelocity = velocity;
+	m_totalVelocity.x *= deltaTime;
+	m_totalVelocity.y *= deltaTime;
+	m_totalVelocity.z *= deltaTime;
+
 	if (!(m_pControllerComponent->GetCollisionFlags() & PxControllerCollisionFlag::eCOLLISION_DOWN))
 	{
 		m_totalVelocity.y -= m_fallAcceleration * deltaTime;
