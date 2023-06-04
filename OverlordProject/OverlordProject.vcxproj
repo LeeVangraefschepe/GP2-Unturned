@@ -101,6 +101,7 @@
     <ClCompile Include="Components\Player\Food.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
+    <ClCompile Include="Scenes\PauseMenuScene.cpp" />
     <ClCompile Include="Prefabs\Particles\HitParticle.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Components\Player\Food.h" />
     <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
+    <ClInclude Include="Scenes\PauseMenuScene.h" />
     <ClInclude Include="Prefabs\Particles\HitParticle.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Components\Item\GroundItem.h" />

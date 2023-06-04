@@ -15,7 +15,7 @@ Item WeaponSlot::GetSelectedItem() const
 
 void WeaponSlot::Initialize(const SceneContext&)
 {
-	m_pFont = ContentManager::Load<SpriteFont>(L"SpriteFonts/Consolas_32.fnt");
+	m_pFont = ContentManager::Load<SpriteFont>(L"SpriteFonts/Minecraft_32.fnt");
 }
 
 void WeaponSlot::Update(const SceneContext&)

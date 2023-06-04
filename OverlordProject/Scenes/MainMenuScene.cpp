@@ -19,6 +19,10 @@ void MainMenuScene::Initialize()
 	m_pButtonStart->GetTransform()->Translate(0.f, m_SceneContext.windowHeight / 4.f, 0.f);
 	AddChild(m_pButtonStart);
 
+	m_pButtonQuit = new ButtonPrefab{ L"Textures/UI/QuitButton.png", XMFLOAT2{300,100} };
+	m_pButtonQuit->GetTransform()->Translate(0.f, m_SceneContext.windowHeight / 4.f + 120, 0.f);
+	AddChild(m_pButtonQuit);
+
 	const auto backgroundImage = new GameObject();
 	backgroundImage->GetTransform()->Translate(0, 0, 0.1f);
 	const auto spriteComp = backgroundImage->AddComponent(new SpriteComponent(L"Textures/UI/Banner.png", { 0.f,0.f }, { 1.f,1.f,1.f,1.f }));
@@ -33,6 +37,16 @@ void MainMenuScene::Update()
 	{
 		m_pButtonStart->Reset();
 		SceneManager::Get()->SetActiveGameScene(L"MapScene");
+	}
+	if (m_pButtonQuit->IsClicked())
+	{
+		//Retrieve the handle to the current process
+		const HWND hWnd = GetConsoleWindow();
+
+		//Post the WM_QUIT message to the application's message queue
+		PostMessage(hWnd, WM_QUIT, 0, 0);
+
+		m_pButtonStart->Reset();
 	}
 }
 

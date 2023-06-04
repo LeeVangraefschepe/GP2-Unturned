@@ -20,5 +20,6 @@ protected:
 	void PostInitialize() override;
 private:
 	ButtonPrefab* m_pButtonStart{};
+	ButtonPrefab* m_pButtonQuit{};
 	float m_TotalRotation{};
 };
