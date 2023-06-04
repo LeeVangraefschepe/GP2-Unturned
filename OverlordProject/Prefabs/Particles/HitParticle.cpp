@@ -3,7 +3,6 @@
 
 HitParticle::HitParticle()
 {
-	//Particle System
 	ParticleEmitterSettings settings{};
 	settings.velocity = { 0.f,-.5f,0.f };
 	settings.minSize = 0.1f;
@@ -15,7 +14,7 @@ HitParticle::HitParticle()
 	settings.minEmitterRadius = 0.f;
 	settings.maxEmitterRadius = 0.5f;
 	settings.color = { 1.f,1.f,1.f, .6f };
-
+	
 	m_pParticle = AddComponent(new ParticleEmitterComponent(L"Textures/Particles/Smoke.png", settings, 20));
 }
 

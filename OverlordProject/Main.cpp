@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainGame.h"
+#include "ScoreManager.h"
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -35,7 +36,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR /*pCmdLine*/, int /*nC
 	//#endif
 
 	const auto pGame = new MainGame();
+	const GameContext empty{};
+	ScoreManager::Create(empty);
 	auto result = pGame->Run(hInstance);
+	ScoreManager::Destroy();
 	UNREFERENCED_PARAMETER(result);
 	delete pGame;
 	

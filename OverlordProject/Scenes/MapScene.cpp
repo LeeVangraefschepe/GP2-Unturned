@@ -35,6 +35,10 @@ void MapScene::Update()
 		m_pMap = new MapPrefab{};
 		AddChild(m_pMap);
 	}
+	if (InputManager::IsKeyboardKey(InputState::pressed, VK_ESCAPE))
+	{
+		SceneManager::Get()->SetActiveGameScene(SceneManager::Get()->GetScene(L"PauseMenuScene"));
+	}
 }
 
 void MapScene::Draw()

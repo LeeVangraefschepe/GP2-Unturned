@@ -99,6 +99,7 @@
     <ClCompile Include="Components\Player\Energy.cpp" />
     <ClCompile Include="Components\Player\Inventory.cpp" />
     <ClCompile Include="Components\Player\Food.cpp" />
+    <ClCompile Include="Scenes\EndGameScene.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial.cpp" />
     <ClCompile Include="Materials\DiffuseMaterial_Skinned.cpp" />
     <ClCompile Include="Scenes\PauseMenuScene.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="Materials\ColorMaterial.cpp" />
     <ClCompile Include="Materials\SpikyMaterial.cpp" />
     <ClCompile Include="Components\Player\StatsDisplay.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
@@ -154,6 +156,7 @@
     <ClInclude Include="Components\Player\Energy.h" />
     <ClInclude Include="Components\Player\Inventory.h" />
     <ClInclude Include="Components\Player\Food.h" />
+    <ClInclude Include="Scenes\EndGameScene.h" />
     <ClInclude Include="Materials\DiffuseMaterial.h" />
     <ClInclude Include="Materials\DiffuseMaterial_Skinned.h" />
     <ClInclude Include="Scenes\PauseMenuScene.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="Materials\ColorMaterial.h" />
     <ClInclude Include="Materials\SpikyMaterial.h" />
     <ClInclude Include="Components\Player\StatsDisplay.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Materials\UberMaterial.h" />

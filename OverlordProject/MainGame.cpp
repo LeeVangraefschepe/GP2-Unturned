@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainGame.h"
 
+#include "Scenes/EndGameScene.h"
 #include "Scenes/MainMenuScene.h"
 #include "Scenes/MapScene.h"
 #include "Scenes/PauseMenuScene.h"
@@ -19,8 +20,8 @@ void MainGame::OnGamePreparing(GameContext& gameContext)
 void MainGame::Initialize()
 {
 	SceneManager::Get()->AddGameScene(new MainMenuScene());
-	SceneManager::Get()->AddGameScene(new MapScene());
 	SceneManager::Get()->AddGameScene(new PauseMenuScene());
+	SceneManager::Get()->AddGameScene(new EndGameScene());
 }
 
 LRESULT MainGame::WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

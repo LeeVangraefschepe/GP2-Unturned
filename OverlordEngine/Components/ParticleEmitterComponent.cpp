@@ -25,7 +25,13 @@ void ParticleEmitterComponent::Initialize(const SceneContext& sceneContext)
 	if (!m_pParticleMaterial)
 	{
 		m_pParticleMaterial = MaterialManager::Get()->CreateMaterial<ParticleMaterial>();
+	}
+	if (!m_pVertexBuffer)
+	{
 		CreateVertexBuffer(sceneContext);
+	}
+	if (!m_pParticleTexture)
+	{
 		m_pParticleTexture = ContentManager::Load<TextureData>(m_AssetFile);
 	}
 }
