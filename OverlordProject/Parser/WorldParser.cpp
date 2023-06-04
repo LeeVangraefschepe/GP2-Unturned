@@ -138,3 +138,39 @@ std::vector<WorldParser::ModelData> WorldParser::ItemSpawnLoader(const std::wstr
     }
     return models;
 }
+
+std::vector<XMFLOAT3> WorldParser::ZombieLoader(const std::wstring& path) const
+{
+    std::vector<XMFLOAT3> spawns{};
+    std::wifstream input{ path };
+
+    if (input.is_open())
+    {
+        std::wstring line;
+        while (std::getline(input, line))
+        {
+            XMFLOAT3 pos{};
+            std::wstringstream ss(line);
+
+            std::wstring cache;
+            std::wstring x_str, y_str, z_str;
+
+            std::getline(ss, cache, L':');
+            std::getline(ss, x_str, L' ');
+            std::getline(ss, cache, L':');
+            std::getline(ss, y_str, L' ');
+            std::getline(ss, cache, L':');
+            std::getline(ss, z_str, L' ');
+            pos.x = std::stof(x_str);
+            pos.y = std::stof(y_str);
+            pos.z = std::stof(z_str);
+
+            spawns.push_back(pos);
+        }
+    }
+    else
+    {
+        Logger::LogWarning(L"No file found for zombies.", path);
+    }
+    return spawns;
+}

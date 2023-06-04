@@ -2,6 +2,7 @@
 #include "PauseMenuScene.h"
 
 #include "MapScene.h"
+#include "ScoreManager.h"
 
 PauseMenuScene::PauseMenuScene() : GameScene{L"PauseMenuScene"}{}
 
@@ -50,6 +51,7 @@ void PauseMenuScene::Update()
 	}
 	if (m_pButtonRestart->IsClicked())
 	{
+		ScoreManager::Get()->ResetScore();
 		sceneManager->RemoveGameScene(sceneManager->GetScene(L"MapScene"), true);
 		SceneManager::Get()->AddGameScene(new MapScene());
 		SceneManager::Get()->SetActiveGameScene(L"MapScene");

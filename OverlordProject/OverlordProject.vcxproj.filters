@@ -23,7 +23,7 @@
     <ClCompile Include="Components\Item\GroundItem.cpp" />
     <ClCompile Include="Components\Player\ItemPicker.cpp" />
     <ClCompile Include="Prefabs\Mob\Zombie.cpp" />
-    <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
+    <ClCompile Include="Components\Other\MobManager.cpp" />
     <ClCompile Include="Components\Other\Health.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
     <ClCompile Include="Components\Player\StatsDisplay.cpp" />
@@ -66,7 +66,7 @@
     <ClInclude Include="Components\Player\ItemPicker.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Prefabs\Mob\Zombie.h" />
-    <ClInclude Include="Prefabs\Mob\MobManager.h" />
+    <ClInclude Include="Components\Other\MobManager.h" />
     <ClInclude Include="Components\Other\Health.h" />
     <ClInclude Include="System\Observer.h" />
     <ClInclude Include="System\Subject.h" />

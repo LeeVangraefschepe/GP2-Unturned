@@ -21,14 +21,21 @@ bool TimeManager::IsNight() const
 	return progress < 0.2f || progress > 0.75f;
 }
 
+TimeManager::TimeManager(MobManager* pMobManager) :
+m_pMobManager(pMobManager)
+{
+}
+
 void TimeManager::Update(const SceneContext& sceneContext)
 {
 	m_currentDayTime += sceneContext.pGameTime->GetElapsed();
 	if (m_currentDayTime >= m_totalDayTime)
 	{
 		m_dayCount++;
+		m_pMobManager->IncreaseSpawns(m_dayCount);
 		ScoreManager::Get()->AddScore(100);
 		m_currentDayTime = 0.f;
+		m_pMobManager->Spawn();
 	}
 
 	sceneContext.pLights->GetDirectionalLight().intensity = GetDaylightIntensity();

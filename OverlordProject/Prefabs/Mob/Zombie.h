@@ -11,6 +11,7 @@ class Zombie final : public GameObject, Observer<Health>
 	float m_fallAcceleration{50.f};
 
 	Health* m_playerHealth{ nullptr };
+	Health* m_pHealth{ nullptr };
 	float m_damage{10.f};
 	float m_attackDelay{ 2.f };
 	float m_currentAttackDelay{};
@@ -37,6 +38,7 @@ public:
 
 	void Initialize(const SceneContext&) override;
 	void Update(const SceneContext&) override;
+	void Set(const XMFLOAT3& position, float health) const;
 
 	Zombie(const Zombie& other) = delete;
 	Zombie(Zombie&& other) noexcept = delete;

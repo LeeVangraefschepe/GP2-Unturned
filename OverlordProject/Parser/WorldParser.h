@@ -17,5 +17,6 @@ public:
 	std::vector<ModelData> RoadLoader(const std::wstring& path) const;
 	std::vector<ModelData> HouseLoader(const std::wstring& path) const;
 	std::vector<ModelData> ItemSpawnLoader(const std::wstring& path) const;
+    std::vector<XMFLOAT3> ZombieLoader(const std::wstring& path) const;
 private:
 };

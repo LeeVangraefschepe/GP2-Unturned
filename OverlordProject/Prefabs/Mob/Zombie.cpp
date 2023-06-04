@@ -147,7 +147,8 @@ void Zombie::Initialize(const SceneContext&)
 	m_pControllerComponent->SetCollisionGroup(CollisionGroup::Group5);
 	AddComponent(m_pControllerComponent);
 
-	AddComponent(new Health{ 1.f })->GetSubject()->AddObserver(this);
+	m_pHealth = AddComponent(new Health{ 1.f });
+	m_pHealth->GetSubject()->AddObserver(this);
 }
 
 void Zombie::Update(const SceneContext& sceneContext)
@@ -179,4 +180,11 @@ void Zombie::Update(const SceneContext& sceneContext)
 	}
 	
 	UpdateAnimation();
+}
+
+void Zombie::Set(const XMFLOAT3& position, float health) const
+{
+	GetTransform()->Translate(position);
+	m_pControllerComponent->Translate(position);
+	m_pHealth->SetHealth(health);
 }

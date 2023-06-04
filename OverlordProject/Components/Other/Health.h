@@ -21,6 +21,7 @@ public:
 
 	bool Damage(float amount);
 	void Heal(float amount);
+	void SetHealth(float amount) { m_maxHealth = amount; m_currentHealth = amount; }
 	bool Died() const;
 
 	Subject<Health>* GetSubject() const { return m_subject.get(); }

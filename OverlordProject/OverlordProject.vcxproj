@@ -106,7 +106,7 @@
     <ClCompile Include="Prefabs\Particles\HitParticle.cpp" />
     <ClCompile Include="Materials\Post\PostBloodscale.cpp" />
     <ClCompile Include="Prefabs\Player.cpp" />
-    <ClCompile Include="Prefabs\Mob\MobManager.cpp" />
+    <ClCompile Include="Components\Other\MobManager.cpp" />
     <ClCompile Include="Parser\WorldParser.cpp" />
     <ClCompile Include="Prefabs\Map\MapPrefab.cpp" />
     <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
@@ -166,7 +166,7 @@
     <ClInclude Include="Components\Item\GroundItem.h" />
     <ClInclude Include="Materials\Post\PostBloodscale.h" />
     <ClInclude Include="Prefabs\Player.h" />
-    <ClInclude Include="Prefabs\Mob\MobManager.h" />
+    <ClInclude Include="Components\Other\MobManager.h" />
     <ClInclude Include="Parser\WorldParser.h" />
     <ClInclude Include="Prefabs\Map\MapPrefab.h" />
     <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />

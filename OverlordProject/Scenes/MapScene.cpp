@@ -2,6 +2,7 @@
 #include "MapScene.h"
 
 #include "Components/Other/TimeManager.h"
+#include "Components/Other/MobManager.h"
 #include "Materials/SkyBoxMaterial.h"
 #include "Prefabs/Character.h"
 #include "Prefabs/Player.h"
@@ -30,9 +31,10 @@ void MapScene::Initialize()
 	m_pCharacter = AddChild(new Player{ {} })->GetPlayerCharacter();
 
 	m_pMap = AddChild(new MapPrefab{});
-	m_pMap->AddComponent(new TimeManager{});
+	const auto mobManager = m_pMap->AddComponent(new MobManager{0, m_pCharacter});
+	m_pMap->AddComponent(new TimeManager{ mobManager });
 
-	AddChild(new Zombie{ {10,0,10}, m_pCharacter});
+	//AddChild(new Zombie{ {10,0,10}, m_pCharacter});
 
 	const auto backgroundImage = new GameObject();
 	backgroundImage->AddComponent(new SpriteComponent(L"Textures/UI/Crosshair.png", { 0.5f,0.5f }, { 1.f,1.f,1.f,1.f }));
@@ -57,7 +59,7 @@ void MapScene::Initialize()
 
 void MapScene::Update()
 {
-	InputManager::SetForceMouseToCenter(false);
+	InputManager::SetForceMouseToCenter(true);
 	if (InputManager::IsKeyboardKey(InputState::pressed, 'R'))
 	{
 		RemoveChild(m_pMap, true);

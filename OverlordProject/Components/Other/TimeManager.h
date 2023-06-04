@@ -1,4 +1,6 @@
 #pragma once
+#include "MobManager.h"
+
 class TimeManager : public BaseComponent
 {
 	float m_currentDayTime{};
@@ -7,8 +9,9 @@ class TimeManager : public BaseComponent
 
 	float GetDaylightIntensity() const;
 	bool IsNight() const;
+	MobManager* m_pMobManager;
 public:
-	TimeManager() = default;
+	TimeManager(MobManager* pMobManager);
 	~TimeManager() override = default;
 
 	void Initialize(const SceneContext&) override{}
