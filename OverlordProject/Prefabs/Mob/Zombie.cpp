@@ -53,10 +53,12 @@ void Zombie::UpdateAttack(float distance, const XMFLOAT3&)
 
 	m_currentAttackDelay = m_attackDelay;
 	m_playerHealth->Damage(m_damage);
+	PlayBiteSound();
 }
 
 void Zombie::OnNotify(unsigned event, Health*)
 {
+	PlayHitSound();
 	if (static_cast<Health::Events>(event) == Health::died)
 	{
 		GetTransform()->Translate(XMFLOAT3{ 0,-100,0 });
@@ -65,10 +67,57 @@ void Zombie::OnNotify(unsigned event, Health*)
 	}
 }
 
+void Zombie::PlayBiteSound()
+{
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	const FMOD_RESULT result{ pFmod->playSound(m_biteSound, nullptr, false, &m_channel) };
+	SoundManager::Get()->ErrorCheck(result);
+
+	//Range sound
+	m_channel->set3DMinMaxDistance(0.f, 5.f);
+
+	//Apply settings
+	const auto spherePos = FmodHelper::ToFmod(m_pControllerComponent->GetTransform()->GetWorldPosition());
+	const auto sphereVel = FmodHelper::ToFmod(XMFLOAT3{0,0,0});
+	m_channel->set3DAttributes(&spherePos, &sphereVel);
+}
+
+void Zombie::PlayHitSound()
+{
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	const FMOD_RESULT result{ pFmod->playSound(m_hitSound, nullptr, false, &m_channel) };
+	SoundManager::Get()->ErrorCheck(result);
+
+	//Range sound
+	m_channel->set3DMinMaxDistance(0.f, 15.f);
+
+	//Apply settings
+	const auto spherePos = FmodHelper::ToFmod(m_pControllerComponent->GetTransform()->GetWorldPosition());
+	const auto sphereVel = FmodHelper::ToFmod(XMFLOAT3{ 0,0,0 });
+	m_channel->set3DAttributes(&spherePos, &sphereVel);
+}
+
 Zombie::Zombie(const XMFLOAT3& position, GameObject* target)
 {
 	GetTransform()->Translate(position);
 	m_playerHealth = target->GetComponent<Health>();
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+
+	if (!m_biteSound)
+	{
+		std::stringstream filePath{};
+		filePath << "Resources/Audio/Zombie.mp3";
+		const FMOD_RESULT result = pFmod->createStream(filePath.str().c_str(), FMOD_3D | FMOD_3D_LINEARROLLOFF, nullptr, &m_biteSound);
+		SoundManager::Get()->ErrorCheck(result);
+	}
+	if (!m_hitSound)
+	{
+		std::stringstream filePath{};
+		filePath << "Resources/Audio/Hit.mp3";
+		const FMOD_RESULT result = pFmod->createStream(filePath.str().c_str(), FMOD_3D | FMOD_3D_LINEARROLLOFF, nullptr, &m_hitSound);
+		SoundManager::Get()->ErrorCheck(result);
+	}
+	
 }
 
 void Zombie::Initialize(const SceneContext&)

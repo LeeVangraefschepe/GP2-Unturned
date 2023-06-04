@@ -6,7 +6,7 @@ class MapScene : public GameScene
 {
 public:
 	MapScene();
-	~MapScene() override = default;
+	~MapScene() override;
 
 	MapScene(const MapScene& other) = delete;
 	MapScene(MapScene&& other) noexcept = delete;
@@ -31,5 +31,7 @@ private:
 
 	Character* m_pCharacter{};
 	GameObject* m_pMap{};
+	FMOD::Sound* m_music{};
+	FMOD::Channel* m_channel{};
 };
 

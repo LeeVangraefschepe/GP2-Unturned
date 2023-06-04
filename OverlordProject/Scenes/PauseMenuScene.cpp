@@ -43,7 +43,7 @@ void PauseMenuScene::Update()
 {
 	InputManager::SetForceMouseToCenter(false);
 	const auto sceneManager = SceneManager::Get();
-	if (m_pButtonContinue->IsClicked())
+	if (m_pButtonContinue->IsClicked() || InputManager::IsKeyboardKey(InputState::pressed, VK_ESCAPE))
 	{
 		sceneManager->SetActiveGameScene(sceneManager->GetScene(L"MapScene"));
 		m_pButtonContinue->Reset();

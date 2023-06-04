@@ -50,7 +50,7 @@ LRESULT MainGame::WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LP
 		//[F3] Previous Scene
 		if (wParam == VK_F3)
 		{
-			SceneManager::Get()->PreviousScene();
+			//SceneManager::Get()->PreviousScene();
 			return 0;
 
 		}
@@ -58,7 +58,7 @@ LRESULT MainGame::WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LP
 		//[F4] Next Scene
 		if (wParam == VK_F4)
 		{
-			SceneManager::Get()->NextScene();
+			//SceneManager::Get()->NextScene();
 			return 0;
 		}
 

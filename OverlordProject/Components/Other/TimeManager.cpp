@@ -27,7 +27,7 @@ void TimeManager::Update(const SceneContext& sceneContext)
 	if (m_currentDayTime >= m_totalDayTime)
 	{
 		m_dayCount++;
-		ScoreManager::Get()->AddScore(10);
+		ScoreManager::Get()->AddScore(100);
 		m_currentDayTime = 0.f;
 	}
 

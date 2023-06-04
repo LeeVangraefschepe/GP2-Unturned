@@ -25,6 +25,12 @@ class Zombie final : public GameObject, Observer<Health>
 
 	void OnNotify(unsigned, Health*) override;
 
+	inline static FMOD::Sound* m_biteSound{nullptr};
+	inline static FMOD::Sound* m_hitSound{nullptr};
+	FMOD::Channel* m_channel{nullptr};
+	void PlayBiteSound();
+	void PlayHitSound();
+
 public:
 	Zombie(const XMFLOAT3& position, GameObject* target);
 	~Zombie() override = default;

@@ -10,6 +10,11 @@
 MapScene::MapScene() :
 	GameScene(L"MapScene") {}
 
+MapScene::~MapScene()
+{
+	m_channel->stop();
+}
+
 void MapScene::Initialize()
 {
 	m_SceneContext.pLights->SetDirectionalLight({ -950.6139526f,66.1346436f,-410.1850471f }, { 0.740129888f, -0.597205281f, 0.309117377f });
@@ -32,6 +37,15 @@ void MapScene::Initialize()
 	backgroundImage->AddComponent(new SpriteComponent(L"Textures/UI/Crosshair.png", { 0.5f,0.5f }, { 1.f,1.f,1.f,1.f }));
 	backgroundImage->GetTransform()->Translate(m_SceneContext.windowWidth/2.f, m_SceneContext.windowHeight / 2.f, 0.1f);
 	AddChild(backgroundImage);
+
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	FMOD_RESULT result = pFmod->createStream("Resources/Audio/BackgroundMusic.mp3", FMOD_2D | FMOD_LOOP_NORMAL, nullptr, &m_music);
+	SoundManager::Get()->ErrorCheck(result);
+
+	//Start playing
+	result = pFmod->playSound(m_music, nullptr, false, &m_channel);
+	SoundManager::Get()->ErrorCheck(result);
+	m_channel->setVolume(0.1f);
 }
 
 void MapScene::Update()

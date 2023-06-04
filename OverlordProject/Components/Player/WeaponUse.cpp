@@ -4,6 +4,21 @@
 #include "Food.h"
 #include "ScoreManager.h"
 
+void WeaponUse::PlayFireSound()
+{
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	const FMOD_RESULT result{ pFmod->playSound(m_fireSound, nullptr, false, &m_channel) };
+	SoundManager::Get()->ErrorCheck(result);
+
+	//Range sound
+	m_channel->set3DMinMaxDistance(0.f, 15.f);
+
+	//Apply settings
+	const auto spherePos = FmodHelper::ToFmod(GetTransform()->GetWorldPosition());
+	const auto sphereVel = FmodHelper::ToFmod(XMFLOAT3{ 0,0,0 });
+	m_channel->set3DAttributes(&spherePos, &sphereVel);
+}
+
 bool WeaponUse::OnHit(Health*& pHealth, XMFLOAT3& position)
 {
 	const auto rayOrigin = PhysxHelper::ToPxVec3(GetTransform()->GetWorldPosition());
@@ -12,6 +27,8 @@ bool WeaponUse::OnHit(Health*& pHealth, XMFLOAT3& position)
 	//Filter for ignore groups
 	PxQueryFilterData filterData{};
 	filterData.data.word0 = ~static_cast<UINT>(CollisionGroup::Group9);
+
+	PlayFireSound();
 
 	//Raycast
 	if (PxRaycastBuffer hit{}; GetScene()->GetPhysxProxy()->Raycast(rayOrigin, rayDirection.getNormalized(), 100.f, hit, PxHitFlag::eDEFAULT, filterData))
@@ -36,6 +53,12 @@ WeaponUse::WeaponUse(WeaponSlot* weaponSlot) :
 	m_pWeaponSlot(weaponSlot)
 {
 	m_pWeaponSlot->GetSubject()->AddObserver(this);
+
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	std::stringstream filePath{};
+	filePath << "Resources/Audio/Fire.mp3";
+	const FMOD_RESULT result = pFmod->createStream(filePath.str().c_str(), FMOD_3D | FMOD_3D_LINEARROLLOFF, nullptr, &m_fireSound);
+	SoundManager::Get()->ErrorCheck(result);
 }
 
 WeaponUse::~WeaponUse()

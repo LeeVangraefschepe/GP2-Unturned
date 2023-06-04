@@ -19,7 +19,10 @@ protected:
 	void OnGUI() override;
 	void PostInitialize() override;
 private:
+	FMOD::Sound* m_music{};
+	FMOD::Channel* m_channel{};
 	ButtonPrefab* m_pButtonStart{};
 	ButtonPrefab* m_pButtonQuit{};
 	float m_TotalRotation{};
+	bool m_loaded{};
 };

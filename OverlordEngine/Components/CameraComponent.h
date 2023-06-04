@@ -42,6 +42,9 @@ private:
 	XMFLOAT4X4 m_ViewProjection{};
 	XMFLOAT4X4 m_ViewProjectionInverse{};
 
+	void Set3DSoundAttributes(const SceneContext& sceneContext);
+	FMOD_VECTOR m_PrevCamPos{};
+
 	float m_FarPlane{}, m_NearPlane{}, m_FOV{}, m_Size{};
 	bool m_IsActive{}, m_PerspectiveProjection{};
 };

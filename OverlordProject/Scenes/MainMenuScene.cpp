@@ -29,19 +29,38 @@ void MainMenuScene::Initialize()
 	m_pButtonQuit = new ButtonPrefab{ L"Textures/UI/QuitButton.png", XMFLOAT2{300,100} };
 	m_pButtonQuit->GetTransform()->Translate(0.f, m_SceneContext.windowHeight / 4.f + 120, 0.1f);
 	AddChild(m_pButtonQuit);
+
+	const auto pFmod{ SoundManager::Get()->GetSystem() };
+	FMOD_RESULT result = pFmod->createStream("Resources/Audio/MainMenuMusic.mp3", FMOD_2D | FMOD_LOOP_NORMAL, nullptr, &m_music);
+	SoundManager::Get()->ErrorCheck(result);
+
+	//Start playing paused
+	result = pFmod->playSound(m_music, nullptr, true, &m_channel);
+	SoundManager::Get()->ErrorCheck(result);
+
+	m_channel->setVolume(0.7f);
 }
 
 void MainMenuScene::Update()
 {
+	if (m_loaded == false)
+	{
+		m_loaded = true;
+	}
+	m_channel->setPaused(false);
+
 	InputManager::SetForceMouseToCenter(false);
 	if (m_pButtonStart->IsClicked())
 	{
+		m_loaded = false;
 		m_pButtonStart->Reset();
+		m_channel->setPaused(true);
 		SceneManager::Get()->AddGameScene(new MapScene());
 		SceneManager::Get()->SetActiveGameScene(L"MapScene");
 	}
 	if (m_pButtonQuit->IsClicked())
 	{
+		m_channel->stop();
 		PostQuitMessage(0);
 		m_pButtonStart->Reset();
 	}

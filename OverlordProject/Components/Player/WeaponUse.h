@@ -8,6 +8,10 @@ class WeaponUse : public BaseComponent, Observer<WeaponSlot>
 	WeaponSlot* m_pWeaponSlot;
 	HitParticle* m_pHitParticle{};
 
+	inline static FMOD::Sound* m_fireSound{nullptr};
+	FMOD::Channel* m_channel{nullptr};
+	void PlayFireSound();
+
 	bool OnHit(Health*& pHealth, XMFLOAT3& position);
 public:
 	WeaponUse(WeaponSlot* weaponSlot);
